@@ -40,6 +40,67 @@ KRAFT_DEEP = Color(0.690, 0.557, 0.384)
 INK = Color(0.10, 0.08, 0.06)           # tinta sobre kraft (casi negro)
 
 
+# ------------------------------------------------------- logo original -------
+LOGO_SRC = ("/root/.claude/uploads/0e0a9f00-60ee-51ed-8d14-f8fcc1e1c924/"
+            "87fe79fa-58fa21742159438399966d6d81db1339.jpeg")
+_logo_cache = None
+
+
+def _pt(p):
+    try:
+        return float(p.x), float(p.y)
+    except AttributeError:
+        return float(p[0]), float(p[1])
+
+
+def get_logo_trace():
+    """Vectoriza el logo original (recortado y en B/N puro) con potrace.
+    Devuelve (curvas, bbox). Cada curva: (punto_inicial, [segmentos]);
+    segmento = ('l', (x,y)) linea o ('c', c1, c2, fin) bezier. Coordenadas
+    en pixeles de la imagen ampliada (y hacia abajo)."""
+    global _logo_cache
+    if _logo_cache is not None:
+        return _logo_cache
+    import numpy as np
+    import potrace
+    from PIL import Image
+    im = Image.open(LOGO_SRC).convert("L")
+    im = im.crop((0, 0, im.width, 250))          # solo el pan (sin contacto)
+    im = im.resize((im.width * 3, im.height * 3), Image.LANCZOS)
+    # potracer traza las regiones con valor 0 como figura: se pasa invertido
+    # para que la figura sea la zona oscura del logo
+    arr = (np.array(im) >= 128)
+    bmp = potrace.Bitmap(arr)
+    path = bmp.trace(turdsize=12, alphamax=1.0, opticurve=1, opttolerance=0.2)
+    curves = []
+    xs, ys = [], []
+    for curve in path:
+        sp = _pt(curve.start_point)
+        segs = []
+        xs.append(sp[0]); ys.append(sp[1])
+        for seg in curve:
+            ep = _pt(seg.end_point)
+            if seg.is_corner:
+                cp = _pt(seg.c)
+                segs.append(("l", cp))
+                segs.append(("l", ep))
+                xs.extend((cp[0], ep[0])); ys.extend((cp[1], ep[1]))
+            else:
+                c1, c2 = _pt(seg.c1), _pt(seg.c2)
+                segs.append(("c", c1, c2, ep))
+                xs.extend((c1[0], c2[0], ep[0]))
+                ys.extend((c1[1], c2[1], ep[1]))
+        curves.append((sp, segs))
+    bbox = (min(xs), min(ys), max(xs), max(ys))
+    _logo_cache = (curves, bbox)
+    return _logo_cache
+
+
+def logo_aspect():
+    _, (x0, y0, x1, y1) = get_logo_trace()
+    return (y1 - y0) / (x1 - x0)
+
+
 # ---------------------------------------------------------------- geometria --
 def loaf_path(c, s=1.0):
     """Silueta simplificada del pan (torpedo). Coordenadas locales, eje
@@ -104,29 +165,28 @@ def tracked_width(font, size, text, tracking=0.0):
 
 # ------------------------------------------------------------------ sello 1 --
 def draw_sello1(c, cx, cy, width_mm=100.0, ink=BLACK):
-    """Logo simplificado: pan solido con texto calado, rotado. El ancho total
-    del arte (bounding box) = width_mm."""
-    angle = 17.0  # grados de rotacion del pan
-    # ancho del bbox de un rect L x H rotado: L*cos(a) + H*sin(a)
-    a = math.radians(angle)
-    L_local, H_local = 110.0, 44.0
-    bbox_w_unit = L_local * math.cos(a) + H_local * math.sin(a)
-    s = (width_mm * mm) / bbox_w_unit  # escala: unidades locales -> puntos
+    """Logo original de Cerrato's Food, vectorizado fielmente de la imagen de
+    marca (sin redibujar). El ancho total del arte = width_mm."""
+    curves, (x0, y0, x1, y1) = get_logo_trace()
+    s = (width_mm * mm) / (x1 - x0)
+    mx, my = (x0 + x1) / 2.0, (y0 + y1) / 2.0
     c.saveState()
     c.translate(cx, cy)
-    c.rotate(angle)
-    # cuerpo del pan
     c.setFillColor(ink)
-    p = loaf_path(c, s)
-    c.drawPath(p, fill=1, stroke=0)
-    # grenado calado
-    draw_score_marks(c, s, color=WHITE)
-    # CERRATO'S calado
-    draw_tracked_text(c, "EricaOne", 14.4 * s, "CERRATO'S",
-                      2.5 * s, -5.0 * s, tracking=0.55 * s, color=WHITE)
-    # FOOD calado, mas pequeno y espaciado
-    draw_tracked_text(c, "EricaOne", 7.0 * s, "FOOD",
-                      9.0 * s, -15.0 * s, tracking=2.8 * s, color=WHITE)
+    p = c.beginPath()
+    for sp, segs in curves:
+        p.moveTo((sp[0] - mx) * s, (my - sp[1]) * s)
+        for seg in segs:
+            if seg[0] == "l":
+                x, y = seg[1]
+                p.lineTo((x - mx) * s, (my - y) * s)
+            else:
+                (c1x, c1y), (c2x, c2y), (ex, ey) = seg[1], seg[2], seg[3]
+                p.curveTo((c1x - mx) * s, (my - c1y) * s,
+                          (c2x - mx) * s, (my - c2y) * s,
+                          (ex - mx) * s, (my - ey) * s)
+        p.close()
+    c.drawPath(p, fill=1, stroke=0, fillMode=0)  # 0 = even-odd (calados)
     c.restoreState()
 
 
@@ -265,12 +325,13 @@ def make_spec_sheet():
     c.setFont("IBMPlexMonoBold", 7.5)
     c.drawString(M, A4H - 44 * mm, "FIG. 01 — SELLO 1 · LOGO (FRENTE)  ·  ESCALA 1:1")
     draw_sello1(c, A4W / 2, fig1_cy, 100.0, ink=INK)
-    dim_line(c, A4W / 2 - 50 * mm, fig1_cy - 27 * mm,
-             A4W / 2 + 50 * mm, fig1_cy - 27 * mm, "100 mm", offset=3 * mm)
+    dim_y = fig1_cy - (100.0 * logo_aspect() / 2 + 4) * mm
+    dim_line(c, A4W / 2 - 50 * mm, dim_y, A4W / 2 + 50 * mm, dim_y,
+             "100 mm", offset=3 * mm)
 
     # --------------------------------------------------- fig 02: sello 2 -----
-    fig2_label_y = A4H - 128 * mm
-    fig2_cy = A4H - 143 * mm
+    fig2_label_y = A4H - 134 * mm
+    fig2_cy = A4H - 147 * mm
     c.setFont("IBMPlexMonoBold", 7.5)
     c.drawString(M, fig2_label_y, "FIG. 02 — SELLO 2 · FRASE (REVERSO)  ·  ESCALA 1:1")
     draw_sello2(c, A4W / 2, fig2_cy, 55.0, ink=INK)
