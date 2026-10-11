@@ -13,7 +13,6 @@ CROPS = {  # nombre: (archivo, x, y, ancho)  -> alto = ancho * 1.25
     "foto-sombrero": ("a5e47b0f-image.jpg", 100, 300, 760),
     "foto-perrito": ("bb4d1775-image.jpg", 0, 0, 1932),
     "foto-pijama": ("3a92ee36-image.jpg", 1000, 950, 900),
-    "foto-brazos": ("6865ef12-image.jpg", 420, 1250, 580),
     "foto-90s": ("cd0ae850-image.jpg", 640, 0, 320),
 }
 for name, (f, x, y, w) in CROPS.items():
