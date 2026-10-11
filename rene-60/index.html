@@ -17,7 +17,7 @@
 <title>René Ferrari · The Big 6-0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=League+Gothic&family=VT323&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=League+Gothic&family=Righteous&family=VT323&display=swap">
 <style>
 /* Layout: a cut-paper Christmas collage on striped red wallpaper. Each section is one "poster";
    halftone stickers with white borders land on it one by one. */
@@ -99,7 +99,7 @@ section, header.hero { position: relative; overflow: clip; }
 }
 .hero .disco { width: clamp(160px, 42vw, 280px); left: clamp(-70px, -8vw, -30px); top: clamp(-40px, -5vw, -20px); z-index: 4; }
 .hero .cane { width: clamp(70px, 16vw, 170px); right: clamp(-30px, -3vw, 10px); top: clamp(20px, 5vw, 70px); --r: 16deg; z-index: 6; }
-.hero .poin { width: clamp(150px, 34vw, 300px); left: clamp(-80px, -12vw, -20px); top: clamp(300px, 70vw, 440px); --r: -12deg; z-index: 1; }
+.hero .poin { width: clamp(150px, 34vw, 260px); left: clamp(-90px, -7vw, -20px); top: clamp(300px, 70vw, 600px); --r: -12deg; z-index: 1; }
 .hero .bow { width: clamp(110px, 24vw, 210px); right: clamp(-30px, -3vw, 20px); top: clamp(360px, 80vw, 520px); --r: 12deg; z-index: 1; }
 
 .hero-grid { display: grid; gap: 30px; align-items: center; }
@@ -310,40 +310,16 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
 .music[aria-pressed="true"] .state { color: var(--led); }
 
 
-/* ---------- 80s layer ---------- */
-/* chrome lettering on the big 60 */
-.big .sixty {
-  background: linear-gradient(180deg, #ffffff 0%, #f1e9ff 30%, #b9b3c9 47%, #4a2a33 50%, #e3b24d 54%, #fff3c4 70%, #ffffff 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: none;
-  -webkit-text-stroke: 2px rgba(255,250,243,.9);
-  filter: drop-shadow(.04em .04em 0 var(--red-deep)) drop-shadow(0 0 18px rgba(255,200,120,.35));
-}
-.big { position: relative; isolation: isolate; }
-.big::before { /* retro striped sunset behind the 60 */
-  content: ""; position: absolute; z-index: -1; right: -2%; top: 50%; width: 1.05em; aspect-ratio: 1; translate: 0 -48%;
-  font-size: clamp(8.5rem, 44vw, 17rem); border-radius: 50%;
-  background: linear-gradient(180deg, #ffd56b 0%, #f39a3c 45%, #e0412f 75%, #a1162a 100%);
-  -webkit-mask: linear-gradient(#000 0 52%, transparent 52% 56%, #000 56% 64%, transparent 64% 69%, #000 69% 76%, transparent 76% 82%, #000 82% 87%, transparent 87% 93%, #000 93%);
-          mask: linear-gradient(#000 0 52%, transparent 52% 56%, #000 56% 64%, transparent 64% 69%, #000 69% 76%, transparent 76% 82%, #000 82% 87%, transparent 87% 93%, #000 93%);
-  opacity: .9;
-}
-.came.neon, .neon { color: #fff; text-shadow: 0 0 2px #fff, 0 0 8px #ff6b7a, 0 0 18px #ff2a45, 0 0 34px rgba(255,42,69,.7); animation: flicker 7s infinite; }
-@keyframes flicker { 0%, 18%, 20%, 52%, 54%, 100% { opacity: 1 } 19%, 53% { opacity: .55 } }
-
-/* laser grid floor */
-.grid80 { position: absolute; left: -20%; right: -20%; bottom: 0; height: clamp(150px, 30vw, 260px); z-index: 0; pointer-events: none; perspective: 260px; overflow: hidden;
-  -webkit-mask: linear-gradient(transparent, #000 45%); mask: linear-gradient(transparent, #000 45%); }
-.grid80::before { content: ""; position: absolute; inset: -100% 0 0; transform: rotateX(62deg); transform-origin: bottom;
-  background-image: linear-gradient(rgba(255,213,107,.75) 2px, transparent 2px), linear-gradient(90deg, rgba(255,213,107,.75) 2px, transparent 2px);
-  background-size: 54px 54px; animation: gridmove 2.4s linear infinite; }
-@keyframes gridmove { to { background-position: 0 54px, 0 0 } }
-
-/* Memphis confetti strip between sections */
-.memphis { height: 46px; position: relative; z-index: 3; background: var(--ink) var(--memphis) center / 260px 46px repeat-x; border-block: 3px solid var(--white); }
-
-/* Santa hats on photos */
+/* retro multi-line 60 */
+.big .sixty { display: block; width: clamp(15rem, 66vw, 26rem); height: auto; overflow: visible; }
+@media (max-width: 899px) { .hero .poin, .hero .bow { display: none; } }
 .ph { position: relative; display: block; }
-.hat { position: absolute; z-index: 3; width: var(--hw); height: auto; aspect-ratio: 100 / 86; left: var(--hx); top: var(--hy); translate: -50% -66%; rotate: var(--hr, -12deg); overflow: visible; filter: drop-shadow(0 5px 5px rgba(60,0,6,.4)); pointer-events: none; }
+
+/* retro stripe divider */
+.stripes80 { position: relative; z-index: 3; height: 40px; background: var(--ink); display: grid; align-content: center; gap: 5px; }
+.stripes80 i { display: block; height: 4px; }
+.stripes80 i:nth-child(1) { background: var(--gold); } .stripes80 i:nth-child(2) { background: #e8743b; }
+.stripes80 i:nth-child(3) { background: var(--white); } .stripes80 i:nth-child(4) { background: #2f8a55; }
 
 /* where: map card */
 .where-card { margin: clamp(40px, 7vw, 60px) auto 0; max-width: 560px; display: grid; justify-items: center; gap: 12px; text-align: center; }
@@ -361,20 +337,52 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
 }
 .btn:hover { transform: scale(1.04); }
 
-/* mixtape */
-.mixtape { padding-block: clamp(60px, 10vw, 100px); text-align: center; }
-.mixtape .wrap { display: grid; justify-items: center; gap: 16px; }
-.mixtape .head .script { font-size: clamp(1.6rem, 7vw, 2.6rem); }
-.mixtape .head .tall { font-size: clamp(3rem, 14vw, 6rem); }
-.tape-svg { width: min(100%, 520px); height: auto; filter: drop-shadow(0 18px 24px rgba(60,0,6,.5)); rotate: -2deg; }
-.tape-svg .reel { transform-box: fill-box; transform-origin: center; animation: reel 3.2s linear infinite; }
-.mixtape .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 22px; margin-top: 6px; }
-.mixtape .btn.alt { color: var(--white); background: var(--ink); box-shadow: 0 0 0 3px var(--white), 0 10px 18px rgba(60,0,6,.4); }
-.mixtape .btn svg { width: 1em; height: 1em; fill: currentColor; }
-#spotify-embed:empty { display: none; }
+/* the song: holographic CD */
+.song { padding-block: clamp(64px, 10vw, 104px); text-align: center; background: radial-gradient(70% 60% at 50% 40%, #3a0d14, var(--ink) 75%); }
+.song .wrap { display: grid; justify-items: center; gap: 18px; }
+.song .head .script { font-size: clamp(1.5rem, 6.5vw, 2.4rem); }
+.song .head .tall { font-size: clamp(2.8rem, 13vw, 5.6rem); }
+.case { position: relative; width: min(78vw, 360px); aspect-ratio: 1; border-radius: 10px; padding: 7%;
+  background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.04) 40%, rgba(255,255,255,.12));
+  border: 2px solid rgba(255,255,255,.5); box-shadow: inset 0 0 0 10px rgba(255,255,255,.05), 0 24px 40px rgba(0,0,0,.6); }
+.case::before { content: ""; position: absolute; left: 3%; top: 30%; width: 5%; height: 40%; border: 2px solid rgba(255,255,255,.4); border-radius: 4px; }
+.cd { width: 100%; aspect-ratio: 1; border-radius: 50%; position: relative; animation: reel 6s linear infinite;
+  background:
+    radial-gradient(circle, transparent 0 9%, rgba(255,255,255,.55) 9.5% 10.5%, rgba(160,200,255,.35) 11% 19%, rgba(255,255,255,.4) 19.5% 20.5%, transparent 21%),
+    conic-gradient(from 20deg, #1b1b22, #ff5a8a 8%, #ffd36b 13%, #6ef0ff 18%, #2a2a33 26%, #121218 40%, #b48cff 50%, #ff7a3d 55%, #fff1a8 59%, #1a1a20 68%, #0f0f14 80%, #6ef0ff 88%, #ff5a8a 93%, #1b1b22);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.4); }
+.cd::after { content: ""; position: absolute; inset: 47.5%; border-radius: 50%; background: var(--ink); }
+.cd-label { position: absolute; inset: 22% 22%; border-radius: 50%; display: grid; place-items: center; text-align: center; pointer-events: none; }
+.song .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 22px; margin-top: 6px; }
+.song .btn.alt { color: var(--white); background: transparent; box-shadow: 0 0 0 2px var(--white); }
+.song .btn svg { width: 1em; height: 1em; fill: currentColor; }
+.song .note2 { font-family: var(--f-tall); text-transform: uppercase; letter-spacing: .06em; font-size: 1.1rem; color: rgba(255,250,243,.75); max-width: 36ch; }
+
+/* family album */
+.album { margin-top: clamp(56px, 9vw, 84px); display: grid; justify-items: center; gap: 18px; text-align: center; }
+.album .script { font-size: clamp(1.4rem, 6vw, 2.2rem); }
+.album .pair { display: grid; gap: 26px; width: 100%; max-width: 980px; }
+@media (min-width: 760px) { .album .pair { grid-template-columns: 1fr 1fr; } }
+.album figure { background: var(--white); padding: 10px 10px 0; box-shadow: 0 14px 22px rgba(60,0,6,.45); rotate: var(--r, -1.5deg); }
+.album figure:nth-child(2) { --r: 1.8deg; }
+.album img { width: 100%; height: auto; filter: sepia(.12) contrast(1.04); }
+.album figcaption { font-family: var(--f-script); color: var(--red-deep); font-size: clamp(.9rem, 3.4vw, 1.2rem); line-height: 1.6; padding: 8px 4px 10px; }
+
+/* disco night (RSVP) */
+.rsvp { background: radial-gradient(80% 50% at 50% 0%, #3a0d14, var(--ink) 70%); }
+.rsvp::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .5; mix-blend-mode: screen;
+  background-image: radial-gradient(circle, rgba(255,255,255,.9) 0 2px, transparent 3px), radial-gradient(circle, rgba(255,120,150,.8) 0 2px, transparent 3px), radial-gradient(circle, rgba(120,230,255,.8) 0 2px, transparent 3px), radial-gradient(circle, rgba(255,210,110,.9) 0 2px, transparent 3px);
+  background-size: 90px 70px, 130px 110px, 170px 90px, 110px 150px; background-position: 0 0, 40px 30px, 80px 10px, 20px 60px;
+  animation: lights 14s linear infinite; }
+@keyframes lights { to { background-position: 360px 140px, -220px 260px, 340px -180px, -260px -200px; } }
+.hang { position: absolute; z-index: 2; top: 0; display: flex; flex-direction: column; align-items: center; pointer-events: none; animation: sway var(--sw, 6s) ease-in-out infinite; transform-origin: top center; }
+.hang::before { content: ""; width: 1px; height: var(--str, 60px); background: rgba(255,250,243,.6); }
+.hang img { width: 100%; filter: drop-shadow(0 10px 22px rgba(255,255,255,.18)); }
+@keyframes sway { 0%,100% { rotate: -2deg } 50% { rotate: 2deg } }
+
+#spotify-embed:empty#spotify-embed:empty { display: none; }
 #spotify-embed { width: min(100%, 520px); }
 #spotify-embed iframe { width: 100%; height: 152px; border: 0; border-radius: 12px; }
-@media (prefers-reduced-motion: reduce) { .grid80::before { animation: none } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -386,12 +394,6 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs><g id="arm"><path d="M0 0V-44M0-30l-10-10M0-30l10-10M0-16l-8-8M0-16l8-8"/></g>
-  <symbol id="hat" viewBox="0 0 100 86">
-    <path d="M14 64 C22 34 40 10 66 8 C80 8 90 16 92 30 C86 24 78 22 72 26 C66 32 70 48 76 62 Z" fill="#c8262d" stroke="#fffaf3" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M30 40 C40 24 54 16 66 14" stroke="rgba(255,255,255,.25)" stroke-width="4" fill="none" stroke-linecap="round"/>
-    <rect x="6" y="58" width="80" height="20" rx="10" fill="#fffaf3"/>
-    <circle cx="92" cy="32" r="9" fill="#fffaf3"/>
-  </symbol>
   <g id="flake" fill="none" stroke="#fffaf3" stroke-width="4" stroke-linecap="round"><use href="#arm"/><use href="#arm" transform="rotate(60)"/><use href="#arm" transform="rotate(120)"/><use href="#arm" transform="rotate(180)"/><use href="#arm" transform="rotate(240)"/><use href="#arm" transform="rotate(300)"/></g></defs>
 </svg>
 
@@ -399,7 +401,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
 <header class="hero" id="portada">
   <div class="garland" aria-hidden="true"></div>
   <div class="pc disco slap float" style="--d:.15s;--fd:9s" data-depth="-0.12" aria-hidden="true">
-    <img src="collage/disco.webp" width="929" height="929" alt="">
+    <img src="collage/bola-plata.webp" width="900" height="900" alt="">
     <span class="glint" style="--x:22%;--y:18%"></span><span class="glint" style="--x:58%;--y:46%;--gd:1.3s"></span><span class="glint" style="--x:34%;--y:66%;--gd:2.1s"></span>
   </div>
   <div class="pc cane slap" style="--d:.3s" data-depth="0.1" aria-hidden="true"><img src="collage/candy.webp" width="333" height="1011" alt=""></div>
@@ -425,24 +427,23 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
 
   <div class="wrap hero-grid">
     <div class="hero-text">
-      <p class="script came neon slap" style="--d:.7s">La Navidad llegó antes</p>
+      <p class="script came slap" style="--d:.7s">La Navidad llegó antes</p>
       <h1 class="script name slap" style="--d:.8s">René Ferrari</h1>
-      <p class="big slap" style="--d:.95s" aria-label="The Big 6-0!"><span class="tall the" aria-hidden="true">The<br>Big</span><span class="tall sixty" aria-hidden="true">6-0!</span></p>
+      <p class="big slap" style="--d:.95s" aria-label="The Big 60"><span class="tall the" aria-hidden="true">The<br>Big</span><svg class="sixty" viewBox="-36 -14 530 370" aria-hidden="true"><defs><g font-family="Righteous, Impact, sans-serif" stroke-linejoin="round" paint-order="stroke"></g></defs><g font-family="Righteous, Impact, sans-serif" stroke-linejoin="round"><mask id="m6" maskUnits="userSpaceOnUse" x="-60" y="-60" width="660" height="480"><text x="0" y="300" font-size="330" stroke="#fff" stroke-width="56" fill="none">6</text><text x="0" y="300" font-size="330" stroke="#000" stroke-width="44" fill="none">6</text><text x="0" y="300" font-size="330" stroke="#fff" stroke-width="32" fill="none">6</text><text x="0" y="300" font-size="330" stroke="#000" stroke-width="20" fill="none">6</text><text x="0" y="300" font-size="330" stroke="#fff" stroke-width="8" fill="none">6</text><text x="0" y="300" font-size="330" fill="#000">6</text></mask><mask id="m0" maskUnits="userSpaceOnUse" x="-60" y="-60" width="660" height="480"><text x="240" y="300" font-size="330" stroke="#fff" stroke-width="56" fill="none">0</text><text x="240" y="300" font-size="330" stroke="#000" stroke-width="44" fill="none">0</text><text x="240" y="300" font-size="330" stroke="#fff" stroke-width="32" fill="none">0</text><text x="240" y="300" font-size="330" stroke="#000" stroke-width="20" fill="none">0</text><text x="240" y="300" font-size="330" stroke="#fff" stroke-width="8" fill="none">0</text><text x="240" y="300" font-size="330" fill="#000">0</text></mask></g><rect x="-60" y="-60" width="660" height="480" fill="#e3b24d" mask="url(#m6)"/><rect x="-60" y="-60" width="660" height="480" fill="#fffaf3" mask="url(#m0)"/></svg></p>
       <p class="tall party slap" style="--d:1.05s">Fiesta navideña de los 80</p>
       <p class="lcd slap" style="--d:1.15s"><i aria-hidden="true"></i>17 OCT · 6:00 PM</p>
     </div>
     <figure class="rene-hero slap" style="--d:1.3s">
-      <span class="ph"><img src="collage/foto-chaqueta.jpg" width="720" height="900" alt="René Ferrari con lentes oscuros y chaqueta de cuero sobre los hombros." fetchpriority="high"><svg class="hat" style="--hx:41%;--hy:27%;--hw:38%;--hr:-10deg" aria-hidden="true"><use href="#hat"/></svg></span>
+      <span class="ph"><img src="collage/foto-chaqueta.jpg" width="720" height="900" alt="René Ferrari con lentes oscuros y chaqueta de cuero sobre los hombros." fetchpriority="high"></span>
       <span class="pc s1 twinkle" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt=""></span>
       <span class="pc s2 twinkle" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt=""></span>
       <span class="pc s3 twinkle" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt=""></span>
       <figcaption class="script tag">el cumpleañero</figcaption>
     </figure>
   </div>
-  <div class="grid80" aria-hidden="true"></div>
 </header>
 
-<div class="memphis" aria-hidden="true"></div>
+<div class="stripes80" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <!-- 2 · INVITACIÓN -->
 <section class="invite" id="invitacion" aria-labelledby="inv-title">
@@ -511,12 +512,19 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
       <h2 class="tall" id="star-title">60 años de René</h2>
     </div>
     <div class="board">
-      <figure class="cut wait" style="--d:0s"><span class="ph"><img src="collage/foto-90s.jpg" width="720" height="900" loading="lazy" alt="René joven en los años noventa, con camisa a cuadros roja."><svg class="hat" style="--hx:40%;--hy:6%;--hw:36%;--hr:-8deg" aria-hidden="true"><use href="#hat"/></svg></span><figcaption>modelo original</figcaption></figure>
+      <figure class="cut wait" style="--d:0s"><span class="ph"><img src="collage/foto-90s.jpg" width="720" height="900" loading="lazy" alt="René joven en los años noventa, con camisa a cuadros roja."></span><figcaption>modelo original</figcaption></figure>
       <figure class="cut wait" style="--d:.1s"><img src="collage/foto-pastel.jpg" width="720" height="900" loading="lazy" alt="René sonriendo frente a su pastel de cumpleaños con una vela encendida."><figcaption>pide un deseo</figcaption></figure>
-      <figure class="cut wait" style="--d:.2s"><span class="ph"><img src="collage/foto-gala.jpg" width="720" height="900" loading="lazy" alt="René con chaleco negro, camisa blanca y corbatín."><svg class="hat" style="--hx:46%;--hy:7%;--hw:30%;--hr:-14deg" aria-hidden="true"><use href="#hat"/></svg></span><figcaption>sabe ponerse de gala…</figcaption></figure>
+      <figure class="cut wait" style="--d:.2s"><span class="ph"><img src="collage/foto-gala.jpg" width="720" height="900" loading="lazy" alt="René con chaleco negro, camisa blanca y corbatín."></span><figcaption>sabe ponerse de gala…</figcaption></figure>
       <figure class="cut wait" style="--d:.3s"><img src="collage/foto-sombrero.jpg" width="720" height="900" loading="lazy" alt="René con sombrero de ala ancha y camisa a cuadros."><figcaption>…y armar la fiesta</figcaption></figure>
-      <figure class="cut wait" style="--d:.4s"><span class="ph"><img src="collage/foto-perrito.jpg" width="720" height="900" loading="lazy" alt="René cargando a un perrito peludo con moño amarillo."><svg class="hat" style="--hx:30%;--hy:11%;--hw:32%;--hr:-18deg" aria-hidden="true"><use href="#hat"/></svg></span><figcaption>con su fan número uno</figcaption></figure>
+      <figure class="cut wait" style="--d:.4s"><span class="ph"><img src="collage/foto-perrito.jpg" width="720" height="900" loading="lazy" alt="René cargando a un perrito peludo con moño amarillo."></span><figcaption>con su fan número uno</figcaption></figure>
       <figure class="cut wait" style="--d:.5s"><img src="collage/foto-pijama.jpg" width="720" height="900" loading="lazy" alt="René sonriendo en pijama navideña roja."><figcaption>navidad, versión René</figcaption></figure>
+    </div>
+    <div class="album">
+      <p class="script">con sus papás y hermanos</p>
+      <div class="pair">
+        <figure class="wait"><img src="collage/familia-playa.jpg" width="1000" height="585" loading="lazy" alt="René de niño en la playa con sus papás y hermanos, junto a un carro blanco."><figcaption>los 70: playa en familia</figcaption></figure>
+        <figure class="wait" style="--d:.15s"><img src="collage/familia-80s.jpg" width="1000" height="590" loading="lazy" alt="René joven con lentes oscuros y camisa negra, junto a sus papás y hermanos."><figcaption>los 80: René con lentes oscuros</figcaption></figure>
+      </div>
     </div>
     <div class="tv-wrap">
       <p class="script">prueba en video: René sí baila</p>
@@ -533,11 +541,11 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
   </div>
 </section>
 
-<div class="memphis" aria-hidden="true"></div>
+<div class="stripes80" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <!-- 3 · DRESS CODE -->
 <section class="dress" id="dresscode" aria-labelledby="dress-title">
-  <div class="pc disco float wait" data-depth="-0.1" aria-hidden="true"><img src="collage/disco.webp" width="929" height="929" alt="" loading="lazy"><span class="glint" style="--x:30%;--y:24%"></span></div>
+  <div class="pc disco float wait" data-depth="-0.1" aria-hidden="true"><img src="collage/bola-oro.webp" width="900" height="900" alt="" loading="lazy"><span class="glint" style="--x:30%;--y:24%"></span></div>
   <div class="pc st1 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
   <div class="pc st2 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
   <div class="wrap">
@@ -567,49 +575,31 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
   </div>
 </section>
 
-<div class="memphis" aria-hidden="true"></div>
+<div class="stripes80" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
-<!-- MIXTAPE -->
-<section class="mixtape" id="mixtape" aria-labelledby="mix-title">
-  <div class="pc st1 twinkle wait" style="width:clamp(36px,7vw,58px);right:8%;top:10%" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
+<!-- LA CANCIÓN -->
+<section class="song" id="cancion" aria-labelledby="song-title">
   <div class="wrap">
     <div class="head">
-      <p class="script">la mixtape de René</p>
-      <h2 class="tall" id="mix-title">Lado A · Navidad 1985</h2>
+      <p class="script">la canción de la noche</p>
+      <h2 class="tall" id="song-title">Dale play</h2>
     </div>
-    <svg class="tape-svg" viewBox="0 0 400 250" role="img" aria-label="Casete de la mixtape de René">
-      <rect x="6" y="6" width="388" height="238" rx="18" fill="#160b0b" stroke="#fffaf3" stroke-width="6"/>
-      <rect x="28" y="26" width="344" height="140" rx="10" fill="#fffaf3"/>
-      <rect x="28" y="26" width="344" height="30" rx="10" fill="#c8262d"/>
-      <rect x="28" y="46" width="344" height="10" fill="#c8262d"/>
-      <rect x="28" y="56" width="344" height="6" fill="#e3b24d"/>
-      <rect x="28" y="62" width="344" height="6" fill="#1f5a3a"/>
-      <text x="200" y="47" text-anchor="middle" font-family="League Gothic, Impact, sans-serif" font-size="22" letter-spacing="3" fill="#fffaf3">MIXTAPE · RENÉ 60</text>
-      <text x="48" y="96" font-family="Homemade Apple, cursive" font-size="16" fill="#8f141c">Lado A: canciones para</text>
-      <text x="48" y="122" font-family="Homemade Apple, cursive" font-size="16" fill="#8f141c">la fiesta de Navidad</text>
-      <rect x="110" y="128" width="180" height="34" rx="17" fill="#2a2524"/>
-      <g class="reel"><circle cx="140" cy="145" r="13" fill="#fffaf3"/><path d="M140 134v22M129 145h22" stroke="#2a2524" stroke-width="3"/></g>
-      <g class="reel"><circle cx="260" cy="145" r="13" fill="#fffaf3"/><path d="M260 134v22M249 145h22" stroke="#2a2524" stroke-width="3"/></g>
-      <rect x="160" y="140" width="80" height="10" rx="3" fill="#5a3a2a"/>
-      <path d="M90 244 L110 192 H290 L310 244" fill="#2a2524" stroke="#fffaf3" stroke-width="4"/>
-      <circle cx="150" cy="222" r="6" fill="#fffaf3"/><circle cx="250" cy="222" r="6" fill="#fffaf3"/>
-      <text x="350" y="232" font-family="VT323, monospace" font-size="18" fill="#fffaf3">C-60</text>
-    </svg>
+    <div class="case" aria-hidden="true"><div class="cd"></div></div>
     <div id="spotify-embed"><iframe src="https://open.spotify.com/embed/track/7vQbuQcyTflfCIOu3Uzzya?theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Canción de la fiesta en Spotify"></iframe></div>
     <div class="row">
       <a class="btn" target="_blank" rel="noopener" href="https://open.spotify.com/track/7vQbuQcyTflfCIOu3Uzzya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Escuchar en Spotify</a>
-      <button class="btn alt" type="button" id="music2">Versión ochentera en la página</button>
+      <button class="btn alt" type="button" id="music2">Música de la página</button>
     </div>
   </div>
 </section>
 
-<div class="memphis" aria-hidden="true"></div>
+<div class="stripes80" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <!-- 4 · CONFIRMACIÓN -->
 <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
-  <div class="grid80" aria-hidden="true"></div>
-  <div class="pc poin wait" aria-hidden="true"><img src="collage/poinsettia.webp" width="800" height="800" alt="" loading="lazy"></div>
-  <div class="pc disco float wait" data-depth="-0.1" aria-hidden="true"><img src="collage/disco.webp" width="929" height="929" alt="" loading="lazy"><span class="glint" style="--x:40%;--y:30%;--gd:.8s"></span></div>
+  <div class="hang" style="left:4%;width:clamp(80px,18vw,150px);--str:clamp(30px,6vw,60px);--sw:6.5s" aria-hidden="true"><img src="collage/bola-plata.webp" width="900" height="900" alt="" loading="lazy"></div>
+  <div class="hang" style="right:6%;width:clamp(110px,24vw,210px);--str:clamp(10px,3vw,30px);--sw:7.5s" aria-hidden="true"><img src="collage/bola-color.webp" width="900" height="900" alt="" loading="lazy"></div>
+  <div class="hang" style="right:34%;width:clamp(50px,11vw,90px);--str:clamp(60px,14vw,120px);--sw:5.4s" aria-hidden="true"><img src="collage/bola-oro.webp" width="900" height="900" alt="" loading="lazy"></div>
   <div class="pc cane wait" aria-hidden="true"><img src="collage/candy.webp" width="333" height="1011" alt="" loading="lazy"></div>
   <div class="pc st1 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
   <div class="pc st2 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
@@ -663,18 +653,6 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
     document.documentElement.style.setProperty('--noise', `url(${c.toDataURL()})`);
   } catch (e) {}
 
-
-  /* Memphis confetti pattern */
-  const memphis = `<svg xmlns='http://www.w3.org/2000/svg' width='260' height='46' viewBox='0 0 260 46'>
-    <path d='M8 30 q8 -14 16 0 t16 0 t16 0' fill='none' stroke='%23e3b24d' stroke-width='4' stroke-linecap='round'/>
-    <path d='M78 36 l12 -22 l12 22z' fill='%23c8262d' stroke='%23fffaf3' stroke-width='2'/>
-    <circle cx='126' cy='18' r='7' fill='%232f8a55'/>
-    <g stroke='%23fffaf3' stroke-width='3' stroke-linecap='round'><path d='M146 12l8 8M154 12l-8 8'/></g>
-    <rect x='170' y='22' width='22' height='10' fill='%23fffaf3' transform='rotate(-20 181 27)'/>
-    <circle cx='212' cy='30' r='5' fill='none' stroke='%23e3b24d' stroke-width='3'/>
-    <path d='M226 14 l4 8 l9 1 l-7 6 l2 9 l-8 -5 l-8 5 l2 -9 l-7 -6 l9 -1z' fill='%23e3b24d'/>
-  </svg>`.replace(/\n\s*/g, ' ').replace(/#/g, '%23');
-  document.documentElement.style.setProperty('--memphis', `url("data:image/svg+xml,${memphis.replace(/"/g, "'")}")`);
 
   /* stickers land as their section scrolls in */
   const waits = [...document.querySelectorAll('.wait')];
