@@ -17,793 +17,504 @@
 <title>René Ferrari · The Big 6-0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Big+Shoulders+Display:wght@800;900&family=Permanent+Marker&family=Shrikhand&family=VT323&family=Yellowtail&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=League+Gothic&family=VT323&display=swap">
 <style>
-/* Layout: a 1985 private party, told in four "reels" — night-sky hero, paper ticket, velvet dress code, red RSVP. Single deliberate night palette. */
+/* Layout: a cut-paper Christmas collage on striped red wallpaper. Each section is one "poster";
+   halftone stickers with white borders land on it one by one. */
 :root {
-  --ink: #15110e;          /* living-room-at-night black */
-  --ink-2: #221b16;
-  --pine: #123f2f;         /* pine green */
-  --pine-2: #2f7a55;       /* lit pine, for offsets */
-  --red: #b8162a;          /* vintage Christmas red */
-  --wine: #6e0d1a;         /* velvet / wine */
-  --oxblood: #1c0507;      /* tinsel-curtain shadows */
-  --neon: #ff4257;         /* neon sign tube */
-  --red-deep: #7d141c;
-  --cream: #f3e6c8;        /* printed-paper cream */
-  --paper: #ecdcb8;
-  --polaroid: #f7f2e6;
-  --gold: #d9ab4f;
-  --stamp: #ff8c2e;        /* film date-stamp orange */
-  --vcr: #9ff0c6;          /* VCR display mint */
+  --red: #c8262d;
+  --red-deep: #8f141c;
+  --wine: #5e0c14;
+  --white: #fffaf3;
+  --cream: #f6ead2;
+  --ink: #160b0b;
+  --led: #ff2a1f;
+  --gold: #e3b24d;
 
-  --f-name: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
-  --f-fat: "Shrikhand", "Cooper Black", Georgia, serif;
-  --f-script: "Yellowtail", "Brush Script MT", cursive;
-  --f-marker: "Permanent Marker", "Marker Felt", "Comic Sans MS", cursive;
+  --f-script: "Homemade Apple", "Brush Script MT", cursive;
+  --f-tall: "League Gothic", "Bebas Neue", Impact, "Arial Narrow", sans-serif;
   --f-vhs: "VT323", ui-monospace, "Courier New", monospace;
-  --f-body: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --gutter: clamp(16px, 5vw, 48px);
-  --max: 1140px;
-  color-scheme: dark;
+  --max: 1180px;
+  --gutter: clamp(16px, 5vw, 40px);
+  color-scheme: light;
 }
-html { scroll-behavior: smooth; background: var(--ink); }
+html { scroll-behavior: smooth; background: var(--red); }
 body {
-  background: var(--ink);
-  color: var(--cream);
-  font-family: var(--f-body);
-  font-size: 16px;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
+  background: var(--red) url("collage/stripes.jpg") center top / 540px auto repeat;
+  color: var(--white);
+  font-family: var(--f-tall);
   overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
 }
+h1, h2, h3, p, figure { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+:focus-visible { outline: 3px dashed var(--white); outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
-h1, h2, h3, p { margin: 0; }
-img { display: block; max-width: 100%; }
-a { color: inherit; }
-:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.wrap { position: relative; z-index: 3; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+section, header.hero { position: relative; overflow: clip; }
 
-/* ---------- film grain (whole page) ---------- */
-.grain {
-  position: fixed; inset: -60px; z-index: 90; pointer-events: none;
-  opacity: .1; mix-blend-mode: overlay;
-  background-image: var(--noise, none);
-  animation: grain 0.9s steps(5) infinite;
+/* film grain */
+.grain { position: fixed; inset: -60px; z-index: 90; pointer-events: none; opacity: .13; mix-blend-mode: overlay; background-image: var(--noise, none); animation: grain .9s steps(5) infinite; }
+@keyframes grain { 0%{transform:translate(0,0)} 25%{transform:translate(-20px,12px)} 50%{transform:translate(16px,-24px)} 75%{transform:translate(-8px,26px)} 100%{transform:translate(0,0)} }
+
+/* ---------- type ---------- */
+.script { font-family: var(--f-script); font-weight: 400; line-height: 1.55; color: var(--white); text-shadow: 0 2px 0 rgba(100,10,16,.35); }
+.tall { font-family: var(--f-tall); font-weight: 400; text-transform: uppercase; line-height: .9; letter-spacing: .01em; color: var(--white); }
+.caps { font-family: var(--f-tall); text-transform: uppercase; letter-spacing: .07em; font-size: clamp(1.3rem, 4.8vw, 1.65rem); line-height: 1.2; color: var(--white); }
+
+/* ---------- collage pieces ---------- */
+.pc { position: absolute; z-index: 2; pointer-events: none; rotate: var(--r, 0deg); }
+.pc img, .pc svg { width: 100%; filter: drop-shadow(0 10px 12px rgba(60,0,6,.45)); }
+.float img, .float svg { animation: float var(--fd, 7s) ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0) rotate(0deg) } 50% { transform: translateY(-8px) rotate(1.4deg) } }
+.twinkle img { animation: twinkle 2.6s ease-in-out infinite var(--tw, 0s); }
+@keyframes twinkle { 0%,100% { transform: scale(1) rotate(0deg) } 50% { transform: scale(.82) rotate(14deg) } }
+
+/* the "slap" a sticker makes when it lands */
+.slap { animation: slap .62s cubic-bezier(.2,1.5,.4,1) both; animation-delay: var(--d, 0s); }
+@keyframes slap {
+  0% { opacity: 0; transform: scale(1.45) rotate(9deg); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
 }
-@keyframes grain {
-  0% { transform: translate(0,0) } 20% { transform: translate(-22px,14px) }
-  40% { transform: translate(18px,-26px) } 60% { transform: translate(-10px,30px) }
-  80% { transform: translate(28px,8px) } 100% { transform: translate(0,0) }
-}
+.wait { opacity: 0; }
+.wait.go { opacity: 1; animation: slap .62s cubic-bezier(.2,1.5,.4,1) both; animation-delay: var(--d, 0s); }
+
+/* sparkles over the disco ball */
+.glint { position: absolute; width: 22%; aspect-ratio: 1; left: var(--x); top: var(--y); animation: glint 3.2s ease-in-out infinite var(--gd, 0s); }
+.glint::before, .glint::after { content: ""; position: absolute; left: 50%; top: 50%; background: #fff; border-radius: 2px; box-shadow: 0 0 8px #fff; translate: -50% -50%; }
+.glint::before { width: 100%; height: 3px; } .glint::after { width: 3px; height: 100%; }
+@keyframes glint { 0%,100% { opacity: 0; scale: .2 } 45%,55% { opacity: 1; scale: 1 } }
 
 /* ---------- HERO ---------- */
-.hero {
-  position: relative; overflow: clip;
-  background:
-    radial-gradient(60% 50% at 0% 100%, rgba(47,122,85,.25), transparent 70%),
-    var(--oxblood);
-  padding-block: 20px 72px;
+.hero { padding-block: clamp(150px, 36vw, 230px) clamp(56px, 9vw, 96px); }
+.garland {
+  position: absolute; z-index: 5; left: 0; right: 0; top: -10px; height: clamp(110px, 21vw, 220px);
+  background: url("collage/garland.webp") left top / auto 100% repeat-x;
+  filter: drop-shadow(0 10px 10px rgba(40,0,4,.4));
+  pointer-events: none;
 }
-.hero::before { /* scanlines */
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 3;
-  background: repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px);
-  opacity: .35;
-}
-.hero::after { /* VHS tracking band */
-  content: ""; position: absolute; left: 0; right: 0; height: 46px; top: -60px; z-index: 4; pointer-events: none;
-  background: linear-gradient(to bottom, transparent, rgba(243,230,200,.07) 40%, rgba(243,230,200,.12) 50%, transparent);
-  animation: tracking 9s linear infinite 2s;
-}
-@keyframes tracking { 0% { transform: translateY(0) } 18%, 100% { transform: translateY(130vh) } }
+.hero .disco { width: clamp(170px, 44vw, 360px); left: clamp(-90px, -11vw, -30px); top: clamp(-40px, -6vw, -10px); z-index: 4; }
+.hero .cane { width: clamp(70px, 16vw, 170px); right: clamp(-30px, -3vw, 10px); top: clamp(20px, 5vw, 70px); --r: 16deg; z-index: 6; }
+.hero .poin { width: clamp(150px, 34vw, 300px); left: clamp(-80px, -12vw, -20px); top: clamp(300px, 70vw, 440px); --r: -12deg; z-index: 1; }
+.hero .bow { width: clamp(110px, 24vw, 210px); right: clamp(-30px, -3vw, 20px); top: clamp(360px, 80vw, 520px); --r: 12deg; z-index: 1; }
 
-.curtain { /* red tinsel curtain, parted in the middle */
-  position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(ellipse 52% 62% at 42% 52%, rgba(20,3,5,.94) 0%, rgba(20,3,5,.72) 45%, rgba(20,3,5,0) 78%),
-    linear-gradient(to bottom, rgba(28,5,7,0) 55%, var(--oxblood) 98%),
-    repeating-linear-gradient(93deg, #3a060c 0 2px, #9e1426 2px 3px, #ff7a7a 3px 3.6px, #6e0d1a 3.6px 6px, #22040a 6px 7px, #c21d33 7px 8px, #4c0811 8px 11px);
-  background-size: 100% 100%, 100% 100%, 240px 100%;
-  animation: curtain 14s linear infinite;
-  opacity: .9;
+.hero-grid { display: grid; gap: 30px; align-items: center; }
+.hero-text { text-align: center; display: grid; justify-items: center; gap: 6px; }
+.came { font-size: clamp(1.25rem, 5.4vw, 2rem); rotate: -5deg; }
+.name { font-size: clamp(2.3rem, 11vw, 5.6rem); line-height: 1.5; margin-top: -.15em; }
+.big { display: flex; align-items: center; gap: .12em; margin-top: -.1em; }
+.big .the { font-size: clamp(2.2rem, 10vw, 4.2rem); line-height: .85; text-align: right; }
+.big .sixty { font-size: clamp(8.5rem, 44vw, 17rem); line-height: .8; text-shadow: .03em .03em 0 var(--red-deep), .06em .06em 0 rgba(60,0,6,.35); }
+.party { font-size: clamp(1.6rem, 7vw, 2.6rem); letter-spacing: .06em; }
+.lcd {
+  margin-top: 14px; display: inline-flex; align-items: center; gap: 12px;
+  background: #120606; border: 3px solid var(--white); border-radius: 10px; padding: 6px 16px 4px;
+  box-shadow: 0 8px 18px rgba(60,0,6,.4);
+  font-family: var(--f-vhs); font-size: clamp(1.35rem, 5.4vw, 1.7rem); color: var(--led); letter-spacing: .08em;
+  text-shadow: 0 0 6px rgba(255,42,31,.8);
+  rotate: -2deg;
 }
-@keyframes curtain { to { background-position: 0 0, 0 0, 240px 0 } }
-.vhs-bar {
-  position: relative; z-index: 5;
-  display: flex; justify-content: space-between; gap: 16px;
-  font-family: var(--f-vhs); font-size: 1.25rem; letter-spacing: .06em; color: var(--cream);
-  text-shadow: 0 0 6px rgba(243,230,200,.45);
-}
-.vhs-bar .rec { display: inline-flex; align-items: center; gap: .4em; }
-.vhs-bar .rec::before { content: ""; width: .55em; height: .55em; border-radius: 50%; background: var(--red); box-shadow: 0 0 8px var(--red); animation: blink 1.2s steps(2) infinite; }
-@keyframes blink { 50% { opacity: 0 } }
+.lcd i { width: 8px; height: 8px; border-radius: 50%; background: var(--led); box-shadow: 0 0 8px var(--led); animation: blink 1.2s steps(2) infinite; }
+@keyframes blink { 50% { opacity: .15 } }
 
-.disco-cluster { position: absolute; z-index: 2; top: 0; right: max(4px, 4vw); width: clamp(150px, 40vw, 330px); height: clamp(170px, 40vw, 330px); pointer-events: none; }
-.disco-wrap {
-  position: absolute; top: 0; right: var(--r, 0); width: var(--w, 40%);
-  display: flex; flex-direction: column; align-items: center;
-  animation: sway var(--sw, 6s) ease-in-out infinite; transform-origin: top center;
-}
-.disco-wrap::before { content: ""; width: 1px; height: var(--str, 60px); background: linear-gradient(var(--cream), rgba(243,230,200,.4)); }
-.disco-wrap canvas { width: 100%; aspect-ratio: 1; }
-@keyframes sway { 0%,100% { transform: rotate(-2deg) } 50% { transform: rotate(2deg) } }
-
-.spots { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-.spots i {
-  position: absolute; left: var(--x); top: var(--y);
-  width: var(--s, 8px); height: var(--s, 8px); border-radius: 50%;
-  background: var(--c, rgba(255,244,220,.75));
-  box-shadow: 0 0 12px 2px var(--c, rgba(255,244,220,.5));
-  opacity: 0; animation: drift var(--d, 16s) linear infinite var(--delay, 0s);
-}
-@keyframes drift {
-  0% { transform: translateX(0); opacity: 0 } 12% { opacity: .8 } 80% { opacity: .55 }
-  100% { transform: translateX(42vw); opacity: 0 }
-}
-
-.hero-grid {
-  position: relative; z-index: 2;
-  display: grid; gap: 48px;
-  padding-top: clamp(150px, 38vw, 170px);
-}
-.hero-type { min-width: 0; }
-.kicker {
-  font-family: var(--f-script); color: #ffe3e5;
-  font-size: clamp(2.3rem, 9.5vw, 4rem); line-height: 1; transform: rotate(-5deg); transform-origin: left;
-  margin-bottom: .35em;
-}
-.neon {
-  text-shadow: 0 0 2px #fff, 0 0 6px var(--neon), 0 0 14px var(--neon), 0 0 28px var(--neon), 0 0 46px rgba(255,66,87,.6);
-  animation: flicker 7s infinite;
-}
-@keyframes flicker {
-  0%, 18%, 20%, 52%, 54%, 100% { opacity: 1 }
-  19%, 53% { opacity: .55 }
-}
-.name {
-  font-family: var(--f-name); font-weight: 900; text-transform: uppercase;
-  font-size: clamp(4.2rem, 21vw, 10.5rem); line-height: .8; letter-spacing: .005em;
-  color: var(--cream);
-  display: flex; flex-direction: column;
-}
-.name .last { color: transparent; -webkit-text-stroke: 2px var(--cream); text-stroke: 2px var(--cream); }
-.big60 { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 0 .35em; margin-top: .12em; }
-.big60 .the-big {
-  font-family: var(--f-name); font-weight: 900; font-size: clamp(1.5rem, 6vw, 2.6rem); line-height: 1;
-  letter-spacing: .14em; color: var(--ink); background: var(--cream);
-  padding: .12em .35em .06em; transform: rotate(-3deg); margin-bottom: .55em;
-}
-.sixty {
-  font-family: var(--f-fat); font-size: clamp(5.4rem, 27vw, 13rem); line-height: .9;
-  color: var(--red);
-  text-shadow: .035em .035em 0 var(--cream), .075em .075em 0 var(--pine-2);
-  white-space: nowrap;
-}
-.subtitle {
-  margin-top: .9rem;
-  font-family: var(--f-name); font-weight: 800; text-transform: uppercase;
-  font-size: clamp(1.1rem, 4.4vw, 1.65rem); letter-spacing: .2em; color: var(--gold);
-  display: flex; align-items: center; gap: .6em; flex-wrap: wrap;
-}
-.subtitle svg { width: .9em; height: .9em; flex: none; fill: var(--gold); }
-@media (max-width: 480px) { .subtitle { letter-spacing: .1em; gap: .4em; flex-wrap: nowrap; font-size: 4.1vw; } }
-.hero-meta {
-  margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 6px 18px;
-  font-family: var(--f-vhs); font-size: 1.35rem; color: var(--cream); letter-spacing: .05em;
-}
-.hero-meta span + span::before { content: "·"; margin-right: 18px; color: var(--red); }
-
-/* ---------- polaroids ---------- */
-.polaroid {
-  margin: 0; position: relative; background: var(--polaroid); color: var(--ink);
-  padding: 12px 12px 0; box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 2px 0 rgba(0,0,0,.2);
-  transform: rotate(var(--tilt, 2deg));
-  transition: transform .5s cubic-bezier(.2,.8,.2,1);
-}
-.polaroid .shot { position: relative; overflow: hidden; background: #2a2420; }
-.polaroid img {
-  width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover;
-  filter: contrast(1.08) saturate(1.12) sepia(.14);
-  transition: filter 1.6s ease;
-}
-.polaroid .shot::after { /* light leak + vignette */
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  background:
-    radial-gradient(70% 60% at 100% 0%, rgba(255,140,46,.22), transparent 60%),
-    radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0,0,0,.35));
-}
-.polaroid figcaption {
-  font-family: var(--f-marker); font-size: clamp(1rem, 3.4vw, 1.25rem); line-height: 1.2;
-  padding: 14px 4px 18px; color: #1d2a6b; /* ballpoint/marker blue */
-  transform: rotate(-1.5deg);
-}
-.stamp {
-  position: absolute; right: 10px; bottom: 8px; z-index: 2;
-  font-family: var(--f-vhs); font-size: 1.35rem; color: var(--stamp); letter-spacing: .08em;
-  text-shadow: 0 0 4px rgba(255,140,46,.8), 0 0 10px rgba(255,90,0,.5);
-}
-.bow { position: absolute; top: -34px; left: 50%; width: 120px; transform: translateX(-50%) rotate(-6deg); z-index: 4; filter: drop-shadow(0 6px 6px rgba(0,0,0,.45)); }
-.tape {
-  position: absolute; top: -14px; left: 50%; width: 92px; height: 28px; z-index: 3;
-  transform: translateX(-50%) rotate(-4deg);
-  background: rgba(243,230,200,.55); box-shadow: 0 1px 2px rgba(0,0,0,.2);
-}
-.flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 3; }
-.hero-photo { --tilt: 3deg; max-width: 420px; width: 88%; justify-self: center; }
-.hero-photo:hover { --tilt: 0deg; }
-
+.rene-hero { position: relative; width: min(88%, 460px); justify-self: center; rotate: 3deg; z-index: 3; }
+.rene-hero > img { filter: drop-shadow(0 16px 18px rgba(60,0,6,.5)); }
+.rene-hero .tag { position: absolute; left: -10%; bottom: -4%; font-size: clamp(1.1rem, 4.6vw, 1.5rem); rotate: -8deg; }
+.rene-hero .s1 { width: 18%; right: -6%; top: 2%; }
+.rene-hero .s2 { width: 11%; right: 6%; top: 24%; --tw: .8s; }
+.rene-hero .s3 { width: 14%; left: -6%; top: 20%; --tw: 1.4s; }
+.hero .cane2 { width: clamp(70px, 16vw, 140px); left: clamp(-30px, -3vw, 0px); bottom: -40px; --r: -24deg; }
 @media (min-width: 900px) {
-  .hero { padding-block: 24px 96px; }
-  .hero-grid { grid-template-columns: 1.3fr .8fr; align-items: end; padding-top: 150px; }
-  .hero-photo { width: 100%; margin-bottom: 40px; }
+  .hero-grid { grid-template-columns: 1.1fr .9fr; }
+  .rene-hero { width: 100%; max-width: 480px; }
 }
 
-/* ---------- tinsel divider ---------- */
-.tinsel {
-  height: 22px; position: relative; z-index: 5;
-  background: repeating-linear-gradient(96deg, #8a6a2a 0 2px, #f6e3a1 2px 3px, #d9ab4f 3px 5px, #5b4618 5px 6px, #e9cf86 6px 8px);
-  -webkit-mask-image: radial-gradient(circle at 6px 11px, #000 5px, transparent 6px), linear-gradient(#000, #000);
-  -webkit-mask-size: 12px 22px, 100% 10px; -webkit-mask-position: 0 0, 0 6px; -webkit-mask-repeat: repeat-x;
-  mask-image: radial-gradient(circle at 6px 11px, #000 5px, transparent 6px), linear-gradient(#000, #000);
-  mask-size: 12px 22px, 100% 10px; mask-position: 0 0, 0 6px; mask-repeat: repeat-x;
-  animation: shimmer 6s linear infinite;
-}
-@keyframes shimmer { to { background-position: 200px 0 } }
-
-/* ---------- reveal on scroll ---------- */
-.is-pending { transform: translateY(28px); opacity: .25; }
-[data-reveal] { transition: transform .9s cubic-bezier(.2,.8,.2,1), opacity .9s ease; }
-.polaroid.is-pending img { filter: brightness(.45) saturate(0) blur(2px); }
-.polaroid.is-pending { transform: translateY(28px) rotate(var(--tilt, 2deg)); }
-
-/* ---------- INVITATION / TICKET ---------- */
-.invite {
-  background: var(--paper); color: var(--ink);
-  padding-block: clamp(64px, 10vw, 112px);
-  position: relative;
-}
-.invite::before { /* printed paper fibres */
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(125,20,28,.05), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(18,63,47,.06), transparent 45%);
-}
-.eyebrow {
-  font-family: var(--f-vhs); font-size: 1.3rem; letter-spacing: .14em; text-transform: uppercase;
-}
-.invite .eyebrow { color: var(--red-deep); text-align: center; margin-bottom: 18px; }
+/* ---------- INVITATION ---------- */
+.invite { padding-block: clamp(70px, 11vw, 120px); }
+.invite .lead { text-align: center; display: grid; gap: 4px; justify-items: center; margin-bottom: clamp(30px, 6vw, 48px); }
+.invite .lead .script { font-size: clamp(2.4rem, 11vw, 4.6rem); line-height: 1.4; rotate: -3deg; }
 .ticket {
-  position: relative; max-width: 900px; margin-inline: auto;
+  position: relative; margin-inline: auto; max-width: 720px;
+  background: var(--cream); color: var(--red-deep);
+  border: 10px solid var(--white); border-radius: 4px;
+  box-shadow: 0 16px 28px rgba(60,0,6,.45);
+  rotate: -1.5deg;
   display: grid; grid-template-columns: 1fr;
-  filter: drop-shadow(0 22px 30px rgba(60,30,10,.28));
-  transform: rotate(-1deg);
 }
-.ticket-main {
-  background: #f8eed6; border-radius: 6px 6px 0 0; overflow: hidden; min-width: 0;
-  border: 2px solid var(--ink); border-bottom: none;
-}
-.ticket-band {
-  background: var(--red); color: var(--cream);
-  font-family: var(--f-vhs); font-size: 1.15rem; letter-spacing: .16em;
-  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-  padding: 8px 18px; border-bottom: 2px solid var(--ink);
-}
-.ticket-body { padding: clamp(22px, 5vw, 40px); }
-.invited {
-  font-family: var(--f-fat); color: var(--red); line-height: .95;
-  font-size: clamp(2.6rem, 11vw, 5rem);
-  text-shadow: .04em .04em 0 var(--gold);
-}
-.celebrate {
-  font-family: var(--f-name); font-weight: 900; text-transform: uppercase; color: var(--pine);
-  font-size: clamp(1.7rem, 7vw, 2.9rem); line-height: .95; margin-top: .45em; text-wrap: balance;
-}
-.celebrate em { font-style: normal; color: var(--red); }
-.details {
-  margin-top: clamp(22px, 4vw, 34px);
-  display: grid; grid-template-columns: 1fr; gap: 0;
-  border-top: 3px double var(--ink); border-bottom: 3px double var(--ink);
-}
-.details > div { padding: 14px 4px; min-width: 0; }
-.details > div + div { border-top: 1px dashed rgba(21,17,14,.5); }
-.details dt { font-family: var(--f-vhs); font-size: 1.1rem; letter-spacing: .14em; color: var(--red-deep); }
-.details dd { margin: 0; font-family: var(--f-name); font-weight: 900; text-transform: uppercase; font-size: clamp(1.7rem, 6.5vw, 2.4rem); line-height: 1; overflow-wrap: anywhere; }
-@media (min-width: 620px) {
-  .details { grid-template-columns: 1.1fr .8fr 1.3fr; }
-  .details > div { padding: 16px 16px; }
-  .details > div:first-child { padding-left: 0; }
-  .details > div + div { border-top: none; border-left: 1px dashed rgba(21,17,14,.5); }
-}
-.fineprint { margin-top: 16px; font-size: .86rem; color: #4a3b2e; max-width: 58ch; }
-
+.ticket-main { padding: clamp(20px, 5vw, 36px); text-align: center; display: grid; gap: 10px; min-width: 0; }
+.ticket .band { font-family: var(--f-vhs); font-size: 1.15rem; letter-spacing: .16em; color: var(--red); display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.ticket .celebrate { font-family: var(--f-tall); font-size: clamp(2.1rem, 9vw, 3.4rem); line-height: .95; color: var(--red); text-transform: uppercase; text-wrap: balance; }
+.ticket .when { display: flex; justify-content: center; align-items: baseline; gap: .3em; flex-wrap: wrap; font-family: var(--f-tall); text-transform: uppercase; color: var(--ink); font-size: clamp(3.2rem, 15vw, 5.8rem); line-height: .9; }
+.ticket .when { flex-direction: column; align-items: center; gap: 0; }
+@media (min-width: 620px) { .ticket .when { flex-direction: row; align-items: baseline; gap: .3em; } .ticket .when span + span::before { content: "·"; color: var(--red); margin-right: .3em; } }
+.ticket .where { font-family: var(--f-script); color: var(--red-deep); font-size: clamp(1.3rem, 5.6vw, 2rem); line-height: 1.6; }
+.ticket .fine { font-family: var(--f-tall); letter-spacing: .08em; font-size: 1.1rem; color: #7a4a3a; text-transform: uppercase; }
 .ticket-stub {
-  position: relative;
-  background: var(--pine); color: var(--cream);
-  border: 2px solid var(--ink); border-top: 2px dashed var(--cream);
-  border-radius: 0 0 6px 6px;
-  padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  border-top: 3px dashed var(--red); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  font-family: var(--f-vhs); font-size: 1.15rem; letter-spacing: .12em; color: var(--red-deep); line-height: 1.1;
 }
-.ticket-stub::before, .ticket-stub::after { /* punched notches */
-  content: ""; position: absolute; width: 26px; height: 26px; border-radius: 50%;
-  background: var(--paper); top: -14px;
-}
-.ticket-stub::before { left: -15px; } .ticket-stub::after { right: -15px; }
-.stub-60 { font-family: var(--f-fat); font-size: 4.4rem; line-height: .9; color: var(--cream); text-shadow: .05em .05em 0 var(--red); }
-.stub-text { font-family: var(--f-vhs); font-size: 1.15rem; letter-spacing: .12em; line-height: 1.2; text-align: right; }
-.stub-text b { display: block; font-family: var(--f-name); font-weight: 900; font-size: 1.6rem; letter-spacing: .08em; }
+.ticket-stub b { font-family: var(--f-tall); font-weight: 400; font-size: 3rem; line-height: .8; color: var(--red); letter-spacing: 0; }
 @media (min-width: 760px) {
-  .ticket { grid-template-columns: 1fr 190px; }
-  .ticket-main { border-radius: 6px 0 0 6px; border-bottom: 2px solid var(--ink); border-right: none; }
-  .ticket-stub {
-    border-radius: 0 6px 6px 0; border-top: 2px solid var(--ink); border-left: 2px dashed var(--cream);
-    flex-direction: column; justify-content: center; text-align: center;
-  }
-  .ticket-stub::before, .ticket-stub::after { left: -15px; right: auto; }
-  .ticket-stub::before { top: -15px; } .ticket-stub::after { top: auto; bottom: -15px; }
-  .stub-text { text-align: center; }
-  .stub-60 { font-size: 5.6rem; }
+  .ticket { grid-template-columns: 1fr 150px; }
+  .ticket-stub { border-top: none; border-left: 3px dashed var(--red); flex-direction: column; justify-content: center; text-align: center; }
+  .ticket-stub b { font-size: 5rem; }
 }
+.invite .pij { width: clamp(96px, 22vw, 210px); right: clamp(-30px, -3vw, 10px); top: clamp(20px, 4vw, 50px); --r: 8deg; z-index: 4; }
+.invite .cane { width: clamp(64px, 14vw, 130px); left: clamp(-24px, -2vw, 20px); top: 20px; --r: -20deg; }
+.invite .st1 { width: clamp(44px, 9vw, 70px); right: 8%; top: 6%; }
+.invite .st2 { width: clamp(30px, 6vw, 48px); left: 10%; bottom: 34%; --tw: 1s; }
+.invite .flake1 { width: clamp(50px, 11vw, 90px); left: 3%; bottom: 8%; }
 
-.countdown {
-  margin: clamp(40px, 7vw, 64px) auto 0; max-width: 620px;
-  background: #0d1a14; color: var(--vcr); border-radius: 10px;
-  border: 2px solid var(--ink);
-  box-shadow: inset 0 0 0 6px #1b2a22, 0 10px 24px rgba(40,20,5,.25);
-  padding: 18px 20px 16px; text-align: center;
+/* the 80s alarm clock */
+.clock-wrap { margin-top: clamp(46px, 8vw, 70px); display: grid; justify-items: center; gap: 12px; text-align: center; }
+.clock-wrap .script { font-size: clamp(1.3rem, 5.6vw, 2rem); rotate: -3deg; }
+.clock {
+  background: linear-gradient(#2a2524, #120e0e);
+  border: 8px solid var(--white); border-radius: 22px; padding: 18px clamp(12px, 4vw, 28px) 12px;
+  box-shadow: 0 18px 30px rgba(60,0,6,.5), inset 0 2px 0 rgba(255,255,255,.08);
+  max-width: 100%;
 }
-.countdown .label { font-family: var(--f-vhs); font-size: 1.1rem; letter-spacing: .18em; color: rgba(159,240,198,.7); }
-.timer { display: flex; justify-content: center; gap: clamp(10px, 4vw, 26px); margin-top: 6px; font-variant-numeric: tabular-nums; }
-.timer div { display: flex; flex-direction: column; align-items: center; min-width: 0; }
-.timer b { font-family: var(--f-vhs); font-weight: 400; font-size: clamp(2.6rem, 11vw, 3.8rem); line-height: 1; text-shadow: 0 0 10px rgba(159,240,198,.55); }
-.timer small { font-family: var(--f-vhs); font-size: 1rem; letter-spacing: .12em; color: rgba(159,240,198,.65); }
-.timer-done { font-family: var(--f-vhs); font-size: 2rem; text-shadow: 0 0 10px rgba(159,240,198,.55); }
+.clock .face { background: #0b0303; border-radius: 10px; padding: 12px clamp(8px, 3vw, 18px) 8px; display: flex; align-items: flex-end; gap: clamp(3px, 1.5vw, 10px); box-shadow: inset 0 0 22px rgba(0,0,0,.9); }
+.unit { display: grid; justify-items: center; gap: 4px; }
+.digits { display: flex; gap: clamp(2px, .8vw, 5px); }
+.digits svg { width: clamp(22px, 7vw, 52px); height: auto; overflow: visible; }
+.seg { fill: rgba(255,42,31,.08); }
+.seg.on { fill: var(--led); filter: drop-shadow(0 0 4px rgba(255,42,31,.9)); }
+.unit small { font-family: var(--f-vhs); font-size: clamp(.85rem, 3vw, 1.05rem); letter-spacing: .14em; color: rgba(255,90,80,.75); }
+.colon { display: grid; gap: clamp(8px, 2.6vw, 18px); padding-bottom: clamp(30px, 8vw, 52px); }
+.colon i { width: clamp(5px, 1.4vw, 9px); aspect-ratio: 1; background: var(--led); border-radius: 2px; box-shadow: 0 0 6px var(--led); animation: blink 1s steps(2) infinite; }
+.clock .meta { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; font-family: var(--f-vhs); font-size: 1rem; letter-spacing: .14em; color: #bfb3a8; }
+.clock .meta .pm::before { content: "● "; color: var(--led); }
+.clock-done { font-family: var(--f-vhs); font-size: clamp(1.6rem, 6vw, 2.4rem); color: var(--led); text-shadow: 0 0 8px rgba(255,42,31,.8); padding: 12px 6px; }
 .cal-link {
-  display: inline-block; margin-top: 14px;
-  font-family: var(--f-vhs); font-size: 1.15rem; letter-spacing: .12em; color: var(--cream);
-  text-decoration: none; border-bottom: 1px solid rgba(243,230,200,.5);
+  display: inline-block; font-family: var(--f-tall); font-size: 1.35rem; letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+  border: 3px solid var(--white); border-radius: 999px; padding: .3em 1em .2em; background: rgba(90,8,14,.3);
 }
-.cal-link:hover { color: var(--gold); border-color: var(--gold); }
+.cal-link:hover { background: var(--white); color: var(--red); }
 
-/* ---------- THE MAN OF THE HOUR ---------- */
-.archive { background: var(--ink); padding-block: clamp(64px, 10vw, 110px); }
-.archive-head { display: grid; gap: 10px; margin-bottom: clamp(34px, 6vw, 56px); }
-.archive .eyebrow { color: var(--gold); }
-.archive h2 {
-  font-family: var(--f-name); font-weight: 900; text-transform: uppercase;
-  font-size: clamp(2.3rem, 9vw, 5rem); line-height: .9; text-wrap: balance; max-width: 15ch;
+/* ---------- STARRING ---------- */
+.starring { padding-block: clamp(60px, 10vw, 110px) clamp(70px, 11vw, 120px); }
+.starring .head { text-align: center; display: grid; justify-items: center; }
+.starring .head .script { font-size: clamp(1.6rem, 7vw, 2.6rem); rotate: -3deg; }
+.starring .head .tall { font-size: clamp(3.4rem, 16vw, 7rem); }
+.board { position: relative; margin-top: clamp(26px, 5vw, 44px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; align-items: start; }
+.cut { position: relative; display: grid; gap: 4px; justify-items: center; rotate: var(--r, 0deg); }
+.cut img { filter: drop-shadow(0 12px 14px rgba(60,0,6,.45)); }
+.cut figcaption { font-family: var(--f-script); font-size: clamp(.95rem, 3.8vw, 1.3rem); line-height: 1.6; text-align: center; color: var(--white); text-shadow: 0 2px 0 rgba(100,10,16,.35); }
+.cut:nth-child(1) { --r: -4deg; } .cut:nth-child(2) { --r: 3deg; margin-top: 30px; }
+.cut:nth-child(3) { --r: 2deg; } .cut:nth-child(4) { --r: -3deg; margin-top: 24px; }
+.cut:nth-child(5) { --r: -2deg; } .cut:nth-child(6) { --r: 4deg; margin-top: 20px; }
+@media (min-width: 900px) { .board { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 40px; } .cut:nth-child(3) { margin-top: 40px; } .cut:nth-child(4) { margin-top: 0; } .cut:nth-child(5) { margin-top: 40px; } .cut:nth-child(6) { margin-top: 0; } }
+.starring .st1 { width: clamp(40px, 8vw, 64px); right: 6%; top: 6%; }
+.starring .flake1 { width: clamp(46px, 10vw, 80px); left: 4%; top: 5%; }
+
+/* retro TV with the dance clip */
+.tv-wrap { margin-top: clamp(50px, 9vw, 80px); display: grid; justify-items: center; gap: 74px; text-align: center; }
+.tv-wrap .script { font-size: clamp(1.3rem, 5.6vw, 2.1rem); rotate: -3deg; }
+.tv {
+  position: relative; width: min(100%, 640px);
+  background: linear-gradient(#5b3a26, #3a2416); border: 8px solid var(--white); border-radius: 26px;
+  padding: clamp(12px, 3vw, 22px) clamp(12px, 3vw, 22px) clamp(40px, 8vw, 56px);
+  box-shadow: 0 18px 30px rgba(60,0,6,.5); rotate: 1.5deg;
 }
-.archive h2 span { color: var(--red); }
-.archive-head p { color: rgba(243,230,200,.75); max-width: 52ch; }
-.strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 18px; }
-.strip .polaroid { padding: 8px 8px 0; }
-.strip .polaroid figcaption { font-size: clamp(.92rem, 3.4vw, 1.12rem); padding: 10px 2px 14px; }
-.strip .polaroid:nth-child(1) { --tilt: -3deg; }
-.strip .polaroid:nth-child(2) { --tilt: 2.5deg; margin-top: 22px; }
-.strip .polaroid:nth-child(3) { --tilt: 1.5deg; }
-.strip .polaroid:nth-child(4) { --tilt: -2deg; margin-top: 22px; }
-.strip .polaroid:hover { --tilt: 0deg; z-index: 2; }
-.strip .stamp { font-size: 1.05rem; }
-@media (min-width: 900px) { .strip { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; } }
+.tv .screen { position: relative; border-radius: 22px / 18px; overflow: hidden; background: #000; box-shadow: inset 0 0 30px rgba(0,0,0,.9); aspect-ratio: 16 / 9; max-width: 100%; }
+.tv video { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05) saturate(1.15); }
+.tv .screen::before { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,.25) 0 1px, transparent 1px 3px), radial-gradient(120% 100% at 50% 50%, transparent 55%, rgba(0,0,0,.55)); }
+.tv .osd { position: absolute; z-index: 3; left: 12px; top: 8px; right: 12px; display: flex; justify-content: space-between; font-family: var(--f-vhs); font-size: clamp(1rem, 3.6vw, 1.4rem); color: #fff; text-shadow: 0 0 6px rgba(255,255,255,.6); letter-spacing: .08em; }
+.tv .osd .rec { color: var(--led); text-shadow: 0 0 6px var(--led); animation: blink 1.2s steps(2) infinite; }
+.tv .osd.bottom { top: auto; bottom: 8px; }
+.tv .knobs { position: absolute; left: 0; right: 0; bottom: clamp(10px, 2vw, 16px); display: flex; justify-content: center; gap: 14px; align-items: center; font-family: var(--f-vhs); color: var(--cream); font-size: 1rem; letter-spacing: .14em; }
+.tv .knobs i { width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #d9cfc4, #6b5a4c); }
+.tv .ant { position: absolute; top: -70px; left: 50%; width: 140px; height: 74px; translate: -50% 0; z-index: -1; }
 
 /* ---------- DRESS CODE ---------- */
-.dress {
-  background:
-    radial-gradient(80% 60% at 20% 0%, rgba(47,122,85,.35), transparent 70%),
-    var(--pine);
-  padding-block: clamp(64px, 10vw, 112px); position: relative; overflow: clip;
+.dress { padding-block: clamp(70px, 11vw, 120px); }
+.dress::before { /* velvet wine panel */
+  content: ""; position: absolute; inset: 22px 0; z-index: 0;
+  background: radial-gradient(80% 60% at 30% 10%, rgba(255,90,110,.12), transparent 60%), var(--wine);
+  clip-path: polygon(0 1.5%, 100% 0, 100% 98.5%, 0 100%);
 }
-.dress-head { position: relative; display: grid; gap: 8px; }
-.dress-label {
-  justify-self: start;
-  font-family: var(--f-name); font-weight: 900; letter-spacing: .2em; font-size: clamp(1.2rem, 4.6vw, 1.7rem);
-  background: var(--red); color: var(--cream); padding: .18em .6em .12em; transform: rotate(-2deg);
-}
-.dress h2 {
-  font-family: var(--f-fat); font-weight: 400; color: var(--cream);
-  font-size: clamp(3rem, 14vw, 7.4rem); line-height: .92;
-  text-shadow: .04em .04em 0 var(--red-deep);
-}
-.dress .script { font-family: var(--f-script); color: var(--gold); font-size: clamp(2rem, 8vw, 3.4rem); line-height: 1.05; transform: rotate(-3deg); transform-origin: left; margin-top: .2em; }
-.dress-intro { margin-top: 26px; max-width: 60ch; color: rgba(243,230,200,.86); font-size: 1.05rem; }
-.badge {
-  position: absolute; right: -6px; top: -30px; width: clamp(104px, 26vw, 168px); aspect-ratio: 1;
-  color: var(--cream); animation: spin 28s linear infinite;
-}
-.badge svg { width: 100%; height: 100%; overflow: visible; }
-@keyframes spin { to { transform: rotate(360deg) } }
-@media (max-width: 560px) { .badge { position: relative; right: auto; top: auto; justify-self: end; margin-top: -40px; } }
-
-.swatches { margin-top: clamp(36px, 6vw, 56px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-@media (min-width: 820px) { .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; } }
-.swatch {
-  background: var(--cream); color: var(--ink); padding: 10px 10px 16px; min-width: 0;
-  box-shadow: 0 10px 22px rgba(0,0,0,.35); display: flex; flex-direction: column; gap: 10px;
-}
-.swatch:nth-child(odd) { transform: rotate(-.8deg); } .swatch:nth-child(even) { transform: rotate(.9deg); }
-.fabric { aspect-ratio: 4 / 3; max-width: 100%; position: relative; overflow: hidden; border: 1px solid rgba(0,0,0,.25); }
-.swatch .no { font-family: var(--f-vhs); font-size: 1rem; letter-spacing: .14em; color: var(--red-deep); }
-.swatch h3 { font-family: var(--f-name); font-weight: 900; text-transform: uppercase; font-size: clamp(1.35rem, 4.8vw, 1.8rem); line-height: .95; }
-.swatch p { font-size: .9rem; line-height: 1.4; color: #3d3127; }
-
-.f-knit { background: var(--red); }
-.f-knit svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.f-knit::after {
-  content: ""; position: absolute; inset: 0;
-  background:
-    repeating-linear-gradient(62deg, transparent 0 3px, rgba(0,0,0,.16) 3px 4px),
-    repeating-linear-gradient(-62deg, transparent 0 3px, rgba(255,255,255,.08) 3px 4px);
-}
-.f-velvet {
-  background:
-    radial-gradient(90% 80% at 28% 22%, rgba(255,120,140,.35), transparent 55%),
-    radial-gradient(120% 120% at 80% 90%, rgba(0,0,0,.55), transparent 60%),
-    #6e0f1d;
-}
-.f-velvet::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(100deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px); }
-.f-sequin {
-  background-color: #1d1608;
-  background-image:
-    radial-gradient(circle at 35% 35%, #fff7d6 0 1.4px, #e6bb5a 2.4px, #7a5718 5px, transparent 5.6px),
-    radial-gradient(circle at 35% 35%, #fff7d6 0 1.4px, #d9ab4f 2.4px, #5e420f 5px, transparent 5.6px);
-  background-size: 12px 12px; background-position: 0 0, 6px 6px;
-}
-.f-sequin::after {
-  content: ""; position: absolute; inset: -50%;
-  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%);
-  animation: sweep 4.5s ease-in-out infinite;
-}
-@keyframes sweep { 0% { transform: translateX(-60%) } 60%, 100% { transform: translateX(60%) } }
-.f-satin {
-  background: linear-gradient(115deg, #0c0c0d 0%, #333238 30%, #0f0f10 52%, #3c3b41 74%, #101011 100%);
-  display: grid; place-items: center;
-}
-.f-satin svg { width: 62%; height: auto; stroke: var(--cream); fill: none; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; position: relative; z-index: 1; }
-.f-plaid {
-  background:
-    repeating-linear-gradient(90deg, rgba(18,63,47,.62) 0 14px, transparent 14px 26px, rgba(243,230,200,.32) 26px 28px, transparent 28px 40px),
-    repeating-linear-gradient(0deg, rgba(18,63,47,.62) 0 14px, transparent 14px 26px, rgba(243,230,200,.32) 26px 28px, transparent 28px 40px),
-    #a71f28;
-}
-.f-plaid::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(0,0,0,.1) 0 1px, transparent 1px 3px); }
-.f-tinsel {
-  background: repeating-linear-gradient(94deg, #6d727a 0 1px, #eef0f2 1px 2px, #9aa0a8 2px 4px, #d9ab4f 4px 5px, #f7e7b4 5px 6px, #555a62 6px 8px);
-  background-size: 220% 100%;
-  animation: shimmer2 7s linear infinite;
-}
-.f-tinsel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,.25), transparent 40%, rgba(0,0,0,.25)); }
-@keyframes shimmer2 { to { background-position: 100% 0 } }
+.dress .head { text-align: center; display: grid; justify-items: center; }
+.dress .head .script.sm { font-size: clamp(1.8rem, 8vw, 3rem); rotate: -4deg; }
+.dress .head .tall { font-size: clamp(4.4rem, 22vw, 10rem); margin-top: -.1em; }
+.dress .head .script.lg { font-size: clamp(1.25rem, 5.4vw, 2rem); margin-top: .2em; }
+.dress-lines { margin: clamp(22px, 4vw, 34px) auto 0; max-width: 34ch; text-align: center; display: grid; gap: 10px; }
+.dress-lines .hl { color: var(--gold); }
+.prints { margin-top: clamp(36px, 6vw, 56px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; max-width: 900px; margin-inline: auto; }
+.print { position: relative; background: var(--white); padding: 10px 10px 0; box-shadow: 0 16px 26px rgba(0,0,0,.45); rotate: var(--r, 0deg); }
+.print:nth-child(1) { --r: -3deg; } .print:nth-child(2) { --r: 2.5deg; margin-top: 40px; }
+.print img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: contrast(1.05) saturate(1.05); }
+.print figcaption { font-family: var(--f-script); color: var(--red-deep); font-size: clamp(.85rem, 3.2vw, 1.15rem); line-height: 1.5; padding: 10px 4px 12px; }
+.tape { position: absolute; top: -14px; left: 50%; width: 38%; height: 26px; translate: -50% 0; rotate: -4deg; background: rgba(255,250,235,.7); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.badge { position: absolute; z-index: 4; width: clamp(104px, 25vw, 170px); right: clamp(-10px, 2vw, 40px); top: clamp(44px, 9vw, 90px); animation: spin 26s linear infinite; }
+.badge svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 8px 10px rgba(0,0,0,.4)); }
+@keyframes spin { to { rotate: 360deg } }
+.dress .disco { width: clamp(110px, 24vw, 220px); left: clamp(-50px, -6vw, -10px); top: 9%; }
+.dress .st1 { width: clamp(40px, 8vw, 66px); left: 10%; bottom: 6%; }
+.dress .st2 { width: clamp(30px, 6vw, 46px); right: 8%; bottom: 10%; --tw: .6s; }
 
 /* ---------- RSVP ---------- */
-.rsvp {
-  background:
-    radial-gradient(40% 30% at 20% 20%, rgba(255,255,255,.05), transparent 70%),
-    radial-gradient(50% 40% at 85% 70%, rgba(0,0,0,.22), transparent 70%),
-    radial-gradient(30% 25% at 60% 15%, rgba(0,0,0,.14), transparent 70%),
-    #8c1422;
-  color: var(--cream); position: relative; overflow: clip;
-  padding-block: clamp(72px, 11vw, 124px);
-  text-align: center;
-}
-.rsvp::before { /* plaster wall speckle */
-  content: ""; position: absolute; inset: 0; opacity: .5; pointer-events: none;
-  background-image: var(--noise, none); mix-blend-mode: multiply;
-}
-.neon-sign {
-  font-family: var(--f-script); font-size: clamp(2.6rem, 11vw, 4.6rem); line-height: 1; color: #ffe8ea;
-  transform: rotate(-6deg); margin-bottom: 4px;
-}
-.rsvp .wrap { position: relative; display: grid; justify-items: center; gap: 18px; }
-.rsvp h2 {
-  font-family: var(--f-name); font-weight: 900; text-transform: uppercase;
-  font-size: clamp(3.4rem, 17vw, 9rem); line-height: .82; text-wrap: balance;
-}
-.rsvp h2 span { display: block; font-family: var(--f-fat); font-weight: 400; text-transform: none; color: var(--cream); font-size: .78em; line-height: 1; text-shadow: .05em .05em 0 var(--ink); }
-.rsvp .eyebrow { color: var(--cream); margin-top: 10px; }
-.phone {
-  font-family: var(--f-vhs); font-size: clamp(2.2rem, 10vw, 3.6rem); line-height: 1; letter-spacing: .04em;
-  background: var(--ink); color: var(--cream); padding: 10px 20px 6px; border-radius: 4px;
-  user-select: all; -webkit-user-select: all; font-variant-numeric: tabular-nums;
-}
+.rsvp { padding-block: clamp(80px, 12vw, 130px) clamp(90px, 13vw, 140px); text-align: center; }
+.rsvp .wrap { display: grid; justify-items: center; gap: 12px; }
+.rsvp .q { font-size: clamp(2.8rem, 13vw, 6rem); line-height: 1.45; rotate: -3deg; }
+.rsvp .caps { margin-top: 6px; }
+.phone { font-family: var(--f-tall); font-size: clamp(3rem, 14vw, 5.4rem); line-height: 1; letter-spacing: .02em; user-select: all; -webkit-user-select: all; }
 .cta {
-  margin-top: 14px;
-  display: inline-flex; align-items: center; gap: .5em;
-  font-family: var(--f-fat); font-size: clamp(1.7rem, 7vw, 2.4rem); line-height: 1;
-  color: var(--red-deep); background: var(--cream); text-decoration: none;
-  padding: .55em 1.1em .6em; border: 3px solid var(--ink); border-radius: 14px;
-  box-shadow: 7px 7px 0 var(--ink);
-  transition: transform .15s ease, box-shadow .15s ease, background .2s;
+  margin-top: 10px; display: inline-flex; align-items: center; gap: .4em;
+  font-family: var(--f-tall); text-transform: uppercase; font-size: clamp(2.2rem, 10vw, 3.4rem); line-height: 1; letter-spacing: .03em;
+  color: var(--red); background: var(--white); text-decoration: none;
+  padding: .32em .9em .24em; border-radius: 999px;
+  box-shadow: 0 0 0 6px var(--red), 0 0 0 10px var(--white), 0 18px 26px rgba(60,0,6,.5);
+  rotate: -2deg; transition: transform .15s ease;
 }
-.cta:hover { background: #fff6dc; transform: translate(-2px,-2px); box-shadow: 9px 9px 0 var(--ink); }
-.cta:active { transform: translate(5px,5px); box-shadow: 2px 2px 0 var(--ink); }
-.cta svg { width: .9em; height: .9em; fill: currentColor; }
-.cta-note { font-size: .92rem; color: rgba(243,230,200,.88); max-width: 40ch; }
-.copy {
-  font: inherit; font-family: var(--f-vhs); font-size: 1.2rem; letter-spacing: .1em;
-  background: transparent; color: var(--cream); border: 1px solid rgba(243,230,200,.6); border-radius: 999px;
-  padding: 4px 16px; cursor: pointer;
-}
-.copy:hover { background: rgba(0,0,0,.15); }
-.confetti { position: fixed; z-index: 95; width: 4px; height: 14px; pointer-events: none; border-radius: 1px; }
+.cta:hover { transform: scale(1.05) rotate(1deg); }
+.cta:active { transform: scale(.96); }
+.cta svg { width: .8em; height: .8em; fill: var(--gold); }
+.note { font-family: var(--f-tall); font-size: 1.2rem; letter-spacing: .06em; text-transform: uppercase; opacity: .92; max-width: 30ch; }
+.copy { font-family: var(--f-tall); font-size: 1.2rem; letter-spacing: .08em; text-transform: uppercase; background: transparent; color: var(--white); border: 2px solid var(--white); border-radius: 999px; padding: .25em 1em .15em; cursor: pointer; }
+.copy:hover { background: rgba(90,8,14,.35); }
+.waiting { position: relative; margin-top: clamp(30px, 6vw, 50px); width: clamp(140px, 34vw, 230px); rotate: -3deg; }
+.waiting img { filter: drop-shadow(0 14px 16px rgba(60,0,6,.5)); }
+.waiting figcaption { position: absolute; left: 82%; top: 18%; width: max-content; max-width: 46vw; text-align: left; font-family: var(--f-script); font-size: clamp(.95rem, 3.8vw, 1.35rem); line-height: 1.6; rotate: 6deg; }
+.nofaltes { margin-top: clamp(20px, 4vw, 34px); font-size: clamp(2rem, 9vw, 3.6rem); line-height: 1.5; rotate: -4deg; }
+.rsvp .disco { width: clamp(120px, 28vw, 260px); right: clamp(-50px, -6vw, -10px); top: 3%; }
+.rsvp .cane { width: clamp(70px, 15vw, 130px); left: clamp(-20px, 1vw, 30px); bottom: 3%; --r: -18deg; }
+.rsvp .poin { width: clamp(120px, 26vw, 230px); left: clamp(-60px, -8vw, -20px); top: 4%; --r: 20deg; }
+.rsvp .st1 { width: clamp(44px, 9vw, 70px); right: 8%; bottom: 20%; }
+.rsvp .st2 { width: clamp(30px, 6vw, 46px); right: 20%; bottom: 8%; --tw: 1.1s; }
+.rsvp .st3 { width: clamp(26px, 5vw, 40px); left: 14%; top: 40%; --tw: .4s; }
+.confetti { position: fixed; z-index: 95; width: 10px; height: 10px; pointer-events: none; }
 
-/* ---------- footer ---------- */
-footer {
-  background: var(--ink); color: rgba(243,230,200,.7);
-  padding-block: 40px calc(96px + env(safe-area-inset-bottom, 0px));
-  font-family: var(--f-vhs); font-size: 1.15rem; letter-spacing: .1em;
-}
-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
-footer a { text-decoration: none; color: var(--cream); }
-footer a:hover { color: var(--gold); }
+footer { position: relative; z-index: 3; background: var(--ink); color: var(--cream); padding-block: 28px calc(92px + env(safe-area-inset-bottom, 0px)); font-family: var(--f-vhs); font-size: 1.15rem; letter-spacing: .1em; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
 
-/* ---------- music toggle ---------- */
+/* music toggle: a sticker */
 .music {
-  position: fixed; z-index: 80;
-  right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  position: fixed; z-index: 80; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px));
   display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--f-vhs); font-size: 1.2rem; letter-spacing: .1em; color: var(--cream);
-  background: rgba(21,17,14,.92); border: 1px solid var(--gold); border-radius: 999px;
-  padding: 6px 16px 6px 8px; cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,.45);
-  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  font-family: var(--f-tall); font-size: 1.3rem; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--red); background: var(--white); border: 0; border-radius: 999px; padding: 6px 16px 4px 8px; cursor: pointer;
+  box-shadow: 0 0 0 3px var(--red), 0 0 0 6px var(--white), 0 10px 20px rgba(60,0,6,.45);
 }
-.music:hover { border-color: var(--cream); }
-.cassette { width: 46px; height: 30px; flex: none; }
+.cassette { width: 44px; height: 28px; flex: none; }
 .cassette .reel { transform-box: fill-box; transform-origin: center; }
-.music[aria-pressed="true"] .reel { animation: spin 2s linear infinite; }
-.music .state { color: var(--gold); }
-.music[aria-pressed="true"] .state { color: var(--vcr); }
-.eq { display: none; gap: 2px; align-items: flex-end; height: 14px; }
-.eq i { width: 3px; background: var(--vcr); animation: eq .8s ease-in-out infinite; }
-.eq i:nth-child(2) { animation-delay: -.3s } .eq i:nth-child(3) { animation-delay: -.55s }
-.music[aria-pressed="true"] .eq { display: inline-flex; }
-@keyframes eq { 0%,100% { height: 3px } 50% { height: 14px } }
+.music[aria-pressed="true"] .reel { animation: reel 2s linear infinite; }
+@keyframes reel { to { transform: rotate(360deg) } }
+.music .state { font-family: var(--f-vhs); font-size: 1.2rem; color: #6d5d55; }
+.music[aria-pressed="true"] .state { color: var(--led); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .is-pending, .polaroid.is-pending { transform: rotate(var(--tilt, 0deg)); opacity: 1; }
-  .polaroid.is-pending img { filter: contrast(1.08) saturate(1.12) sepia(.14); }
-  .spots { display: none; }
+  .wait { opacity: 1; }
 }
 </style>
 
 <div class="grain" aria-hidden="true"></div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><g id="arm"><path d="M0 0V-44M0-30l-10-10M0-30l10-10M0-16l-8-8M0-16l8-8"/></g>
+  <g id="flake" fill="none" stroke="#fffaf3" stroke-width="4" stroke-linecap="round"><use href="#arm"/><use href="#arm" transform="rotate(60)"/><use href="#arm" transform="rotate(120)"/><use href="#arm" transform="rotate(180)"/><use href="#arm" transform="rotate(240)"/><use href="#arm" transform="rotate(300)"/></g></defs>
+</svg>
+
 <!-- 1 · PORTADA -->
 <header class="hero" id="portada">
-  <div class="spots" aria-hidden="true">
-    <i style="--x:4%;--y:30%;--d:17s;--delay:0s"></i>
-    <i style="--x:10%;--y:62%;--d:21s;--delay:3s;--s:6px;--c:rgba(255,190,150,.8)"></i>
-    <i style="--x:28%;--y:18%;--d:19s;--delay:6s;--s:5px"></i>
-    <i style="--x:2%;--y:84%;--d:23s;--delay:9s;--s:9px;--c:rgba(170,240,210,.7)"></i>
-    <i style="--x:40%;--y:48%;--d:18s;--delay:1.5s;--s:4px"></i>
-    <i style="--x:18%;--y:8%;--d:24s;--delay:12s;--s:7px;--c:rgba(255,170,170,.7)"></i>
+  <div class="garland" aria-hidden="true"></div>
+  <div class="pc disco slap float" style="--d:.15s;--fd:9s" data-depth="-0.12" aria-hidden="true">
+    <img src="collage/disco.webp" width="929" height="929" alt="">
+    <span class="glint" style="--x:22%;--y:18%"></span><span class="glint" style="--x:58%;--y:46%;--gd:1.3s"></span><span class="glint" style="--x:34%;--y:66%;--gd:2.1s"></span>
   </div>
-
-  <div class="curtain" aria-hidden="true"></div>
-  <div class="disco-cluster" aria-hidden="true">
-    <div class="disco-wrap" style="--w:52%;--r:22%;--str:clamp(30px,7vw,60px);--sw:6s"><canvas class="disco-ball" width="170" height="170"></canvas></div>
-    <div class="disco-wrap" style="--w:30%;--r:0%;--str:clamp(70px,16vw,140px);--sw:7.5s"><canvas class="disco-ball" width="100" height="100"></canvas></div>
-    <div class="disco-wrap" style="--w:22%;--r:68%;--str:clamp(90px,22vw,190px);--sw:5.2s"><canvas class="disco-ball" width="70" height="70"></canvas></div>
+  <div class="pc cane slap" style="--d:.3s" data-depth="0.1" aria-hidden="true"><img src="collage/candy.webp" width="333" height="1011" alt=""></div>
+  <div class="pc poin slap" style="--d:.45s" data-depth="0.18" aria-hidden="true"><img src="collage/poinsettia.webp" width="800" height="800" alt=""></div>
+  <div class="pc bow slap float" style="--d:.6s;--fd:6s" data-depth="0.08" aria-hidden="true">
+    <svg viewBox="0 0 220 200">
+      <defs>
+        <filter id="velvet" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" result="n"/><feColorMatrix in="n" type="saturate" values="0" result="g"/><feComponentTransfer in="g" result="g2"><feFuncA type="linear" slope=".35"/></feComponentTransfer><feComposite in="g2" in2="SourceGraphic" operator="in" result="t"/><feBlend in="SourceGraphic" in2="t" mode="multiply"/></filter>
+        <radialGradient id="vl" cx="35%" cy="35%" r="75%"><stop offset="0" stop-color="#d23446"/><stop offset=".5" stop-color="#8e1222"/><stop offset="1" stop-color="#3d050c"/></radialGradient>
+        <radialGradient id="vr" cx="65%" cy="35%" r="75%"><stop offset="0" stop-color="#c22c3e"/><stop offset=".5" stop-color="#84101f"/><stop offset="1" stop-color="#36040a"/></radialGradient>
+      </defs>
+      <g filter="url(#velvet)" stroke="#fffaf3" stroke-width="7" stroke-linejoin="round" paint-order="stroke">
+        <path d="M100 82 C86 110 66 150 46 194 L70 182 L80 198 C92 160 104 122 112 90Z" fill="#6e0d1a"/>
+        <path d="M120 82 C134 110 154 150 174 194 L150 182 L140 198 C128 160 116 122 108 90Z" fill="#5a0a15"/>
+        <path d="M110 74 C88 30 34 12 16 34 C2 54 22 92 62 92 C84 92 100 86 110 80Z" fill="url(#vl)"/>
+        <path d="M110 74 C132 30 186 12 204 34 C218 54 198 92 158 92 C136 92 120 86 110 80Z" fill="url(#vr)"/>
+        <ellipse cx="110" cy="80" rx="16" ry="18" fill="url(#vl)"/>
+      </g>
+      <path d="M40 40 C56 34 82 44 98 66" stroke="rgba(255,190,200,.35)" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </svg>
   </div>
+  <div class="pc cane2 slap" style="--d:1.2s" aria-hidden="true"><img src="collage/candy.webp" width="333" height="1011" alt=""></div>
 
-  <div class="wrap">
-    <div class="vhs-bar" aria-hidden="true">
-      <span>▶ PLAY&nbsp;&nbsp;SP&nbsp;&nbsp;<span class="rec">10·17·1985</span></span>
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <p class="script came slap" style="--d:.7s">Christmas came early.</p>
+      <h1 class="script name slap" style="--d:.8s">René Ferrari</h1>
+      <p class="big slap" style="--d:.95s" aria-label="The Big 6-0!"><span class="tall the" aria-hidden="true">The<br>Big</span><span class="tall sixty" aria-hidden="true">6-0!</span></p>
+      <p class="tall party slap" style="--d:1.05s">80s Christmas Birthday Party</p>
+      <p class="lcd slap" style="--d:1.15s"><i aria-hidden="true"></i>OCT 17 · 6:00 PM</p>
     </div>
-
-    <div class="hero-grid">
-      <div class="hero-type">
-        <p class="kicker neon">Christmas came early.</p>
-        <h1 class="name"><span>René</span><span class="last">Ferrari</span></h1>
-        <p class="big60" aria-label="The Big 6-0!">
-          <span class="the-big" aria-hidden="true">THE BIG</span>
-          <span class="sixty" aria-hidden="true">6-0!</span>
-        </p>
-        <p class="subtitle">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8Z"/></svg>
-          80s Christmas Birthday Party
-          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8Z"/></svg>
-        </p>
-        <p class="hero-meta"><span>17 OCT</span><span>6:00 PM</span><span>CASA DE HABITACIÓN</span></p>
-      </div>
-
-      <figure class="polaroid hero-photo" data-reveal>
-        <svg class="bow" viewBox="0 0 120 80" aria-hidden="true">
-          <defs>
-            <radialGradient id="vel" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#d4374a"/><stop offset=".45" stop-color="#8e1222"/><stop offset="1" stop-color="#3f050c"/></radialGradient>
-            <radialGradient id="vel2" cx="60%" cy="35%" r="70%"><stop offset="0" stop-color="#d4374a"/><stop offset=".45" stop-color="#8e1222"/><stop offset="1" stop-color="#3f050c"/></radialGradient>
-          </defs>
-          <path d="M54 34 C40 46 30 62 22 78 L36 74 L40 80 C46 62 52 48 58 38Z" fill="#6e0d1a"/>
-          <path d="M66 34 C80 46 90 62 98 78 L84 74 L80 80 C74 62 68 48 62 38Z" fill="#5a0a15"/>
-          <path d="M60 30 C46 8 18 2 8 14 C0 26 12 44 34 42 C46 41 54 38 60 34Z" fill="url(#vel)"/>
-          <path d="M60 30 C74 8 102 2 112 14 C120 26 108 44 86 42 C74 41 66 38 60 34Z" fill="url(#vel2)"/>
-          <path d="M22 18 C30 14 44 18 52 28" stroke="rgba(255,190,200,.35)" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M98 18 C90 14 76 18 68 28" stroke="rgba(0,0,0,.35)" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <ellipse cx="60" cy="33" rx="9" ry="10" fill="url(#vel)"/>
-        </svg>
-        <div class="shot">
-          <img src="fotos/rene-arbol.jpg" width="900" height="1125" alt="René riéndose, sentado en pijama navideña frente a un árbol de Navidad iluminado." fetchpriority="high">
-          <span class="stamp" aria-hidden="true">'85 10 17</span>
-          <span class="flash" aria-hidden="true"></span>
-        </div>
-        <figcaption>Navidad, versión René.</figcaption>
-      </figure>
-    </div>
+    <figure class="rene-hero slap" style="--d:1.3s">
+      <img src="collage/rene-chaqueta.webp" width="805" height="1142" alt="René Ferrari con lentes oscuros y chaqueta de cuero sobre los hombros." fetchpriority="high">
+      <span class="pc s1 twinkle" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt=""></span>
+      <span class="pc s2 twinkle" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt=""></span>
+      <span class="pc s3 twinkle" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt=""></span>
+      <figcaption class="script tag">el cumpleañero</figcaption>
+    </figure>
   </div>
 </header>
 
-<div class="tinsel" aria-hidden="true"></div>
-
 <!-- 2 · INVITACIÓN -->
 <section class="invite" id="invitacion" aria-labelledby="inv-title">
-  <div class="wrap">
-    <p class="eyebrow" data-reveal>★ Private party · Est. 1966 ★</p>
+  <div class="pc cane wait" data-depth="0.1" aria-hidden="true"><img src="collage/candy.webp" width="333" height="1011" alt="" loading="lazy"></div>
+  <div class="pc st1 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
+  <div class="pc st2 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
+  <div class="pc flake1 float wait" aria-hidden="true"><svg viewBox="-50 -50 100 100"><use href="#flake"/></svg></div>
+  <div class="pc pij wait" data-depth="0.06" aria-hidden="true"><img src="collage/rene-pijama.webp" width="490" height="699" alt="" loading="lazy"></div>
 
-    <article class="ticket" data-reveal>
+  <div class="wrap">
+    <div class="lead">
+      <h2 class="script" id="inv-title">You're invited!</h2>
+    </div>
+
+    <article class="ticket">
       <div class="ticket-main">
-        <div class="ticket-band" aria-hidden="true"><span>PRIVATE PARTY</span><span>ADMIT ONE</span><span>Nº 0060</span></div>
-        <div class="ticket-body">
-          <h2 class="invited" id="inv-title">You're invited!</h2>
-          <p class="celebrate">Let's celebrate <em>60 years</em> of René.</p>
-          <dl class="details">
-            <div><dt>FECHA</dt><dd>October 17</dd></div>
-            <div><dt>HORA</dt><dd>6:00 PM</dd></div>
-            <div><dt>LUGAR</dt><dd>Casa de habitación</dd></div>
-          </dl>
-          <p class="fineprint">Válido para una noche de música, brindis y nostalgia. Se recomienda llegar con ganas de bailar.</p>
-        </div>
+        <p class="band" aria-hidden="true"><span>PRIVATE PARTY</span><span>·</span><span>1985</span></p>
+        <p class="celebrate">Let's celebrate 60 years of René.</p>
+        <p class="when"><span>October 17</span><span>6:00 PM</span></p>
+        <p class="where">Casa de habitación</p>
+        <p class="fine">Música · brindis · nostalgia · ganas de bailar</p>
       </div>
-      <div class="ticket-stub" aria-hidden="true">
-        <span class="stub-60">60</span>
-        <span class="stub-text"><b>RENÉ</b>ADMIT ONE<br>17·10</span>
-      </div>
+      <div class="ticket-stub" aria-hidden="true"><span>ADMIT<br>ONE</span><b>60</b><span>Nº<br>0060</span></div>
     </article>
 
-    <div class="countdown" data-reveal>
-      <p class="label">● REC · FALTA PARA LA FIESTA</p>
-      <div class="timer" id="timer" aria-live="off">
-        <div><b id="t-d">--</b><small>DÍAS</small></div>
-        <div><b id="t-h">--</b><small>HORAS</small></div>
-        <div><b id="t-m">--</b><small>MIN</small></div>
-        <div><b id="t-s">--</b><small>SEG</small></div>
+    <div class="clock-wrap">
+      <p class="script">la cuenta regresiva</p>
+      <div class="clock" role="timer" aria-label="Tiempo que falta para la fiesta" id="clock">
+        <div class="face" id="clock-face">
+          <div class="unit"><div class="digits" data-u="d"></div><small>DÍAS</small></div>
+          <div class="colon" aria-hidden="true"><i></i><i></i></div>
+          <div class="unit"><div class="digits" data-u="h"></div><small>HRS</small></div>
+          <div class="colon" aria-hidden="true"><i></i><i></i></div>
+          <div class="unit"><div class="digits" data-u="m"></div><small>MIN</small></div>
+          <div class="colon" aria-hidden="true"><i></i><i></i></div>
+          <div class="unit"><div class="digits" data-u="s"></div><small>SEG</small></div>
+        </div>
+        <div class="meta"><span>ALARM · OCT 17</span><span class="pm">6:00 PM</span></div>
       </div>
-      <a class="cal-link" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Ren%C3%A9%20Ferrari%20%C2%B7%20The%20Big%206-0&amp;dates=20261017T180000/20261017T235900&amp;ctz=America/Tegucigalpa&amp;details=80s%20Christmas%20Birthday%20Party.%20Dress%20code%3A%2080s%20Christmas.&amp;location=Casa%20de%20habitaci%C3%B3n">+ GUARDAR EN MI CALENDARIO</a>
+      <a class="cal-link" target="_blank" rel="noopener" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Ren%C3%A9%20Ferrari%20%C2%B7%20The%20Big%206-0&amp;dates=20261017T180000/20261017T235900&amp;ctz=America/Tegucigalpa&amp;details=80s%20Christmas%20Birthday%20Party.%20Dress%20code%3A%2080s%20Christmas.&amp;location=Casa%20de%20habitaci%C3%B3n">+ Guardar en mi calendario</a>
     </div>
   </div>
 </section>
 
 <!-- EL CUMPLEAÑERO -->
-<section class="archive" aria-labelledby="arch-title">
+<section class="starring" aria-labelledby="star-title">
+  <div class="pc st1 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
+  <div class="pc flake1 float wait" aria-hidden="true"><svg viewBox="-50 -50 100 100"><use href="#flake"/></svg></div>
   <div class="wrap">
-    <div class="archive-head" data-reveal>
-      <p class="eyebrow">Starring · René Ferrari</p>
-      <h2 id="arch-title">Sixty years. Still <span>the life</span> of the party.</h2>
-      <p>Algunas pruebas del archivo familiar, por si quedaba alguna duda.</p>
+    <div class="head">
+      <p class="script">starring</p>
+      <h2 class="tall" id="star-title">60 años de René</h2>
     </div>
-    <div class="strip">
-      <figure class="polaroid" data-reveal>
-        <div class="shot"><img src="fotos/rene-90s.jpg" width="480" height="600" loading="lazy" alt="René joven, en los años noventa, con camisa a cuadros roja."></div>
-        <figcaption>Modelo original. Ya traía los cuadros.</figcaption>
-      </figure>
-      <figure class="polaroid" data-reveal>
-        <div class="shot"><img src="fotos/rene-gala.jpg" width="640" height="800" loading="lazy" alt="René sonriendo con chaleco negro, camisa blanca y corbatín."><span class="stamp" aria-hidden="true">'86 12 31</span></div>
-        <figcaption>Sabe ponerse de gala…</figcaption>
-      </figure>
-      <figure class="polaroid" data-reveal>
-        <div class="shot"><img src="fotos/rene-sombrero.jpg" width="640" height="800" loading="lazy" alt="René de noche con sombrero de ala ancha y camisa a cuadros, sentado en una silla de jardín."></div>
-        <figcaption>…y sabe armar la fiesta.</figcaption>
-      </figure>
-      <figure class="polaroid" data-reveal>
-        <div class="shot"><img src="fotos/rene-perrito.jpg" width="640" height="800" loading="lazy" alt="René cargando a un perrito peludo con moño amarillo."><span class="stamp" aria-hidden="true">'85 12 24</span></div>
-        <figcaption>Con su fan número uno.</figcaption>
-      </figure>
+    <div class="board">
+      <figure class="cut wait" style="--d:0s"><img src="collage/rene-90s.webp" width="608" height="749" loading="lazy" alt="René joven en los años noventa, con camisa a cuadros roja."><figcaption>modelo original</figcaption></figure>
+      <figure class="cut wait" style="--d:.1s"><img src="collage/rene-pastel.webp" width="770" height="844" loading="lazy" alt="René sonriendo frente a su pastel de cumpleaños con una vela encendida."><figcaption>pide un deseo</figcaption></figure>
+      <figure class="cut wait" style="--d:.2s"><img src="collage/rene-gala.webp" width="627" height="1125" loading="lazy" alt="René con chaleco negro, camisa blanca y corbatín."><figcaption>sabe ponerse de gala…</figcaption></figure>
+      <figure class="cut wait" style="--d:.3s"><img src="collage/rene-sombrero.webp" width="645" height="777" loading="lazy" alt="René con sombrero de ala ancha y camisa a cuadros."><figcaption>…y armar la fiesta</figcaption></figure>
+      <figure class="cut wait" style="--d:.4s"><img src="collage/rene-perrito.webp" width="838" height="970" loading="lazy" alt="René cargando a un perrito peludo con moño amarillo."><figcaption>con su fan número uno</figcaption></figure>
+      <figure class="cut wait" style="--d:.5s"><img src="collage/rene-pijama.webp" width="490" height="699" loading="lazy" alt="René sonriendo en pijama navideña roja."><figcaption>navidad, versión René</figcaption></figure>
+    </div>
+    <div class="tv-wrap">
+      <p class="script">prueba en video: René sí baila</p>
+      <div class="tv">
+        <svg class="ant" viewBox="0 0 140 74" aria-hidden="true"><path d="M70 72 L20 4 M70 72 L120 4" stroke="#fffaf3" stroke-width="4" stroke-linecap="round"/><circle cx="20" cy="4" r="4" fill="#fffaf3"/><circle cx="120" cy="4" r="4" fill="#fffaf3"/></svg>
+        <div class="screen">
+          <video id="baile" src="collage/rene-baile.mp4" poster="collage/rene-baile.jpg" muted loop playsinline preload="metadata" aria-label="Video corto de René bailando en una fiesta."></video>
+          <div class="osd" aria-hidden="true"><span>▶ PLAY</span><span class="rec">● REC</span></div>
+          <div class="osd bottom" aria-hidden="true"><span>SP</span><span>OCT 17 1985</span></div>
+        </div>
+        <div class="knobs" aria-hidden="true"><i></i><span>CH 60</span><i></i></div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="tinsel" aria-hidden="true"></div>
-
 <!-- 3 · DRESS CODE -->
 <section class="dress" id="dresscode" aria-labelledby="dress-title">
+  <div class="pc disco float wait" data-depth="-0.1" aria-hidden="true"><img src="collage/disco.webp" width="929" height="929" alt="" loading="lazy"><span class="glint" style="--x:30%;--y:24%"></span></div>
+  <div class="pc st1 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
+  <div class="pc st2 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
+  <div class="badge" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <defs><path id="circ" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"/></defs>
+      <circle cx="100" cy="100" r="99" fill="#fffaf3"/>
+      <circle cx="100" cy="100" r="90" fill="#c8262d"/>
+      <text font-family="League Gothic, Impact, sans-serif" font-size="24" letter-spacing="2.6" fill="#fffaf3"><textPath href="#circ">UGLY SWEATERS ★ PERMITIDOS ★ NO OBLIGATORIOS ★</textPath></text>
+      <text x="100" y="112" text-anchor="middle" font-family="Homemade Apple, cursive" font-size="26" fill="#fffaf3">¡ok!</text>
+    </svg>
+  </div>
   <div class="wrap">
-    <div class="dress-head" data-reveal>
-      <p class="dress-label">DRESS CODE</p>
-      <h2 id="dress-title">80s Christmas</h2>
-      <p class="script">Dress like it's Christmas, 1985.</p>
-      <div class="badge" aria-hidden="true">
-        <svg viewBox="0 0 200 200">
-          <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
-          <circle cx="100" cy="100" r="98" fill="#c0272f"/>
-          <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 4"/>
-          <text font-family="Big Shoulders Display, Impact, sans-serif" font-weight="900" font-size="21" letter-spacing="3.2" fill="currentColor"><textPath href="#circ">UGLY SWEATERS ★ PERMITIDOS ★ NO OBLIGATORIOS ★</textPath></text>
-          <text x="100" y="96" text-anchor="middle" font-family="Shrikhand, Georgia, serif" font-size="34" fill="currentColor">OK!</text>
-          <text x="100" y="124" text-anchor="middle" font-family="VT323, monospace" font-size="20" fill="currentColor" letter-spacing="2">OPCIONAL</text>
-        </svg>
-      </div>
+    <div class="head">
+      <p class="script sm">dress code</p>
+      <h2 class="tall" id="dress-title">80s Christmas</h2>
+      <p class="script lg">Dress like it's Christmas, 1985.</p>
     </div>
-
-    <p class="dress-intro" data-reveal>Inspírate en la moda navideña de los 80: suéteres retro, hombreras, lentejuelas, terciopelo, prendas rojas y verdes, accesorios vintage y peinados con volumen. Los <em>ugly sweaters</em> están permitidos, pero no son obligatorios. La idea es que cada quien interprete la Navidad ochentera con su propio estilo.</p>
-
-    <div class="swatches">
-      <article class="swatch" data-reveal>
-        <div class="fabric f-knit" id="knit" role="img" aria-label="Muestra de tejido de suéter navideño rojo con copos de nieve"></div>
-        <span class="no">MUESTRA Nº 01</span>
-        <h3>Suéter navideño</h3>
-        <p>Copos de nieve, renos o rombos. Permitido, nunca obligatorio.</p>
-      </article>
-      <article class="swatch" data-reveal>
-        <div class="fabric f-velvet" role="img" aria-label="Muestra de terciopelo rojo vino"></div>
-        <span class="no">MUESTRA Nº 02</span>
-        <h3>Terciopelo</h3>
-        <p>Rojo vino o verde pino. Elegancia de cena del 24.</p>
-      </article>
-      <article class="swatch" data-reveal>
-        <div class="fabric f-sequin" role="img" aria-label="Muestra de lentejuelas doradas"></div>
-        <span class="no">MUESTRA Nº 03</span>
-        <h3>Lentejuelas</h3>
-        <p>Para quien quiera brillar más que el árbol.</p>
-      </article>
-      <article class="swatch" data-reveal>
-        <div class="fabric f-satin" role="img" aria-label="Muestra de satín negro con el dibujo de un blazer de hombreras anchas">
-          <svg viewBox="0 0 100 80" aria-hidden="true"><path d="M8 24 L36 10 L50 26 L64 10 L92 24 L86 76 L14 76 Z"/><path d="M36 10 L44 46 L50 26 L56 46 L64 10"/><path d="M50 46 L50 76"/><circle cx="50" cy="56" r="1.6"/><circle cx="50" cy="66" r="1.6"/></svg>
-        </div>
-        <span class="no">MUESTRA Nº 04</span>
-        <h3>Hombreras</h3>
-        <p>Blazers y chaquetas con estructura. Entre más anchas, más 1985.</p>
-      </article>
-      <article class="swatch" data-reveal>
-        <div class="fabric f-plaid" role="img" aria-label="Muestra de tela a cuadros roja y verde"></div>
-        <span class="no">MUESTRA Nº 05</span>
-        <h3>Cuadros</h3>
-        <p>Rojo con verde. En esto René es experto.</p>
-      </article>
-      <article class="swatch" data-reveal>
-        <div class="fabric f-tinsel" role="img" aria-label="Muestra de espumillón plateado y dorado"></div>
-        <span class="no">MUESTRA Nº 06</span>
-        <h3>Accesorios</h3>
-        <p>Lentes retro, corbatas delgadas, brillo y algo de espumillón.</p>
-      </article>
+    <div class="dress-lines">
+      <p class="caps">Suéteres retro, hombreras, lentejuelas, terciopelo, rojo y verde, accesorios vintage y peinados con volumen.</p>
+      <p class="caps hl">Ugly sweaters: permitidos, no obligatorios.</p>
+      <p class="caps">Interpreta la Navidad ochentera con tu propio estilo.</p>
+    </div>
+    <div class="prints">
+      <figure class="print"><span class="tape" aria-hidden="true"></span><img src="collage/inspo-fiesta.jpg" width="720" height="885" loading="lazy" alt="Grupo en una fiesta navideña con suéteres retro, cuadros, oropel y gorros festivos."><figcaption>inspo: suéteres, cuadros y oropel</figcaption></figure>
+      <figure class="print" style="--d:.15s"><span class="tape" aria-hidden="true"></span><img src="collage/inspo-dj.jpg" width="640" height="954" loading="lazy" alt="Dos invitados con lentes retro, gorro de Santa, diadema de reno y espumillón rojo, junto a una consola de DJ."><figcaption>inspo: lentes, gorros y espumillón</figcaption></figure>
     </div>
   </div>
 </section>
 
 <!-- 4 · CONFIRMACIÓN -->
 <section class="rsvp" id="rsvp" aria-labelledby="rsvp-title">
+  <div class="pc poin wait" aria-hidden="true"><img src="collage/poinsettia.webp" width="800" height="800" alt="" loading="lazy"></div>
+  <div class="pc disco float wait" data-depth="-0.1" aria-hidden="true"><img src="collage/disco.webp" width="929" height="929" alt="" loading="lazy"><span class="glint" style="--x:40%;--y:30%;--gd:.8s"></span></div>
+  <div class="pc cane wait" aria-hidden="true"><img src="collage/candy.webp" width="333" height="1011" alt="" loading="lazy"></div>
+  <div class="pc st1 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
+  <div class="pc st2 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
+  <div class="pc st3 twinkle wait" aria-hidden="true"><img src="collage/star.webp" width="300" height="300" alt="" loading="lazy"></div>
   <div class="wrap">
-    <p class="neon-sign neon" aria-hidden="true">Cheers to 60!</p>
-    <h2 id="rsvp-title" data-reveal>Are you <span>coming?</span></h2>
-    <p class="eyebrow">Confirma tu asistencia</p>
+    <h2 class="script q" id="rsvp-title">Are you coming?</h2>
+    <p class="caps">Confirma tu asistencia</p>
     <p class="phone" id="phone">+504 3333-7644</p>
     <a class="cta" id="cta" target="_blank" rel="noopener"
        href="https://wa.me/50433337644?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20a%20la%20celebraci%C3%B3n%20de%20los%2060%20a%C3%B1os%20de%20Ren%C3%A9%20Ferrari.%20%F0%9F%8E%84%F0%9F%AA%A9">
-      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8Z"/></svg>
-      COUNT ME IN!
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 0 L12.4 7 L20 7.6 L14 12.3 L16.2 20 L10 15.4 L3.8 20 L6 12.3 L0 7.6 L7.6 7Z"/></svg>
+      Count me in!
     </a>
-    <p class="cta-note">Se abre WhatsApp con tu confirmación lista. Solo tienes que enviarla.</p>
-    <button class="copy" id="copy" type="button">COPIAR NÚMERO</button>
+    <p class="note">Se abre WhatsApp con tu confirmación lista para enviar.</p>
+    <button class="copy" id="copy" type="button">Copiar número</button>
+    <figure class="waiting wait"><img src="collage/rene-brazos.webp" width="305" height="893" alt="René de brazos cruzados y lentes oscuros."><figcaption>esperando<br>tu respuesta…</figcaption></figure>
+    <p class="script nofaltes">¡No faltes!</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span>RENÉ FERRARI · THE BIG 6-0 · 17·10</span>
+    <span>RENÉ FERRARI · THE BIG 6-0 · 10·17</span>
     <a href="#portada">◀◀ REBOBINAR</a>
   </div>
 </footer>
 
 <button class="music" id="music" type="button" aria-pressed="false" aria-label="Activar música navideña ochentera">
   <svg class="cassette" viewBox="0 0 46 30" aria-hidden="true">
-    <rect x="1" y="1" width="44" height="28" rx="3" fill="#f3e6c8"/>
-    <rect x="5" y="5" width="36" height="12" rx="2" fill="#c0272f"/>
-    <rect x="12" y="8" width="22" height="6" rx="3" fill="#15110e"/>
-    <g class="reel"><circle cx="16" cy="11" r="2.4" fill="#f3e6c8"/><path d="M16 9v4M14 11h4" stroke="#15110e" stroke-width=".8"/></g>
-    <g class="reel"><circle cx="30" cy="11" r="2.4" fill="#f3e6c8"/><path d="M30 9v4M28 11h4" stroke="#15110e" stroke-width=".8"/></g>
-    <path d="M10 29 L13 21 H33 L36 29" fill="#123f2f"/>
+    <rect x="1" y="1" width="44" height="28" rx="3" fill="#160b0b"/>
+    <rect x="5" y="5" width="36" height="12" rx="2" fill="#c8262d"/>
+    <rect x="12" y="8" width="22" height="6" rx="3" fill="#fffaf3"/>
+    <g class="reel"><circle cx="16" cy="11" r="2.4" fill="#160b0b"/><path d="M16 9v4M14 11h4" stroke="#fffaf3" stroke-width=".8"/></g>
+    <g class="reel"><circle cx="30" cy="11" r="2.4" fill="#160b0b"/><path d="M30 9v4M28 11h4" stroke="#fffaf3" stroke-width=".8"/></g>
+    <path d="M10 29 L13 21 H33 L36 29" fill="#e3b24d"/>
   </svg>
-  <span>SOUNDTRACK</span>
-  <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span>Soundtrack</span>
   <span class="state" id="music-state">OFF</span>
 </button>
 
@@ -811,7 +522,7 @@ footer a:hover { color: var(--gold); }
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- film grain tile ---------- */
+  /* film grain tile */
   try {
     const c = document.createElement('canvas'); c.width = c.height = 140;
     const x = c.getContext('2d'); const d = x.createImageData(140, 140);
@@ -820,162 +531,93 @@ footer a:hover { color: var(--gold); }
     document.documentElement.style.setProperty('--noise', `url(${c.toDataURL()})`);
   } catch (e) {}
 
-  /* ---------- disco ball ---------- */
-  document.querySelectorAll('.disco-ball').forEach((cv, idx) => {
-  if (cv.getContext) {
-    const g = cv.getContext('2d');
-    let W = 0, dpr = 1;
-    const size = () => {
-      dpr = Math.min(2, window.devicePixelRatio || 1);
-      W = cv.getBoundingClientRect().width || 120;
-      cv.width = W * dpr; cv.height = W * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    size(); addEventListener('resize', () => { size(); if (reduce) draw(0); });
-    const N = idx ? 10 : 13, facets = [];
-    for (let i = 0; i < N; i++) {
-      const a0 = -Math.PI / 2 + i * Math.PI / N, a1 = a0 + Math.PI / N, ac = (a0 + a1) / 2;
-      const M = Math.max(6, Math.round(2 * N * Math.cos(ac)));
-      for (let j = 0; j < M; j++) facets.push({ a0, a1, o0: j * 2 * Math.PI / M, o1: (j + 1) * 2 * Math.PI / M, s: Math.random() * 1000, t: (i * 7 + j * 3) % 5 });
-    }
-    const tints = [[235,235,240],[255,228,196],[205,228,255],[235,235,240],[255,205,205]];
-    const L = (() => { const v = [-0.45, -0.55, 0.7]; const n = Math.hypot(...v); return v.map(k => k / n); })();
-    const spin = [0.00022, -0.0003, 0.00026][idx] || 0.00022, off = idx * 1.7;
-    const draw = (time) => {
-      const R = W / 2 - 1.5, cx = W / 2, cy = W / 2, rot = time * spin + off;
-      g.clearRect(0, 0, W, W);
-      g.beginPath(); g.arc(cx, cy, R, 0, Math.PI * 2); g.fillStyle = '#17161a'; g.fill();
-      const P = (la, lo) => [cx + R * Math.cos(la) * Math.sin(lo), cy + R * Math.sin(la)];
-      const glints = [];
-      for (const f of facets) {
-        const ac = (f.a0 + f.a1) / 2, oc = (f.o0 + f.o1) / 2 + rot;
-        const nx = Math.cos(ac) * Math.sin(oc), ny = Math.sin(ac), nz = Math.cos(ac) * Math.cos(oc);
-        if (nz <= 0.03) continue;
-        const ga = (f.a1 - f.a0) * .1, go = (f.o1 - f.o0) * .1;
-        const p1 = P(f.a0 + ga, f.o0 + go + rot), p2 = P(f.a0 + ga, f.o1 - go + rot), p3 = P(f.a1 - ga, f.o1 - go + rot), p4 = P(f.a1 - ga, f.o0 + go + rot);
-        const diff = Math.max(0, nx * L[0] + ny * L[1] + nz * L[2]);
-        const tw = Math.pow(Math.max(0, Math.sin(time * 0.0016 + f.s)), 60);
-        let b = (0.16 + 0.6 * diff + 0.8 * Math.pow(diff, 14) + tw * 0.9) * (0.5 + 0.5 * nz);
-        b = Math.min(1.25, b);
-        const tc = tints[f.t];
-        g.fillStyle = `rgb(${Math.min(255, tc[0] * b) | 0},${Math.min(255, tc[1] * b) | 0},${Math.min(255, tc[2] * b) | 0})`;
-        g.beginPath(); g.moveTo(...p1); g.lineTo(...p2); g.lineTo(...p3); g.lineTo(...p4); g.closePath(); g.fill();
-        if (tw > 0.5 && nz > 0.4) glints.push([(p1[0] + p3[0]) / 2, (p1[1] + p3[1]) / 2, tw]);
-      }
-      const sh = g.createRadialGradient(cx - R * .35, cy - R * .4, R * .1, cx, cy, R);
-      sh.addColorStop(0, 'rgba(255,255,255,.12)'); sh.addColorStop(.7, 'rgba(0,0,0,0)'); sh.addColorStop(1, 'rgba(0,0,0,.45)');
-      g.beginPath(); g.arc(cx, cy, R, 0, Math.PI * 2); g.fillStyle = sh; g.fill();
-      for (const [x, y, a] of glints) {
-        const s = R * .32 * a;
-        g.strokeStyle = `rgba(255,250,235,${a})`; g.lineWidth = 1.2;
-        g.beginPath(); g.moveTo(x - s, y); g.lineTo(x + s, y); g.moveTo(x, y - s); g.lineTo(x, y + s); g.stroke();
-      }
-    };
-    if (reduce) draw(0);
-    else {
-      let on = true;
-      const io = new IntersectionObserver(es => { on = es[0].isIntersecting; if (on) requestAnimationFrame(loop); });
-      const loop = (t) => { draw(t); if (on) requestAnimationFrame(loop); };
-      io.observe(cv); requestAnimationFrame(loop);
-    }
-  }
-  });
-
-  /* ---------- camera flash on the hero polaroid ---------- */
-  if (!reduce) {
-    const fl = document.querySelector('.hero-photo .flash');
-    const img = document.querySelector('.hero-photo img');
-    if (fl && img && fl.animate) {
-      setTimeout(() => {
-        fl.animate([{ opacity: 0 }, { opacity: .95, offset: .08 }, { opacity: 0 }], { duration: 900, easing: 'ease-out' });
-        img.animate([{ filter: 'brightness(1.6) saturate(.2) contrast(.8) sepia(.3)' }, { filter: 'contrast(1.08) saturate(1.12) sepia(.14)' }], { duration: 2200, easing: 'ease-out' });
-      }, 450);
-    }
-  }
-
-  /* ---------- reveal on scroll (from a visible resting state) ---------- */
-  if (!reduce && 'IntersectionObserver' in window) {
-    const els = [...document.querySelectorAll('[data-reveal]')];
+  /* stickers land as their section scrolls in */
+  const waits = [...document.querySelectorAll('.wait')];
+  if (reduce || !('IntersectionObserver' in window)) waits.forEach(el => el.classList.remove('wait'));
+  else {
     const io = new IntersectionObserver(es => es.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.remove('is-pending'); io.unobserve(e.target); }
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      if (!el.style.getPropertyValue('--d')) el.style.setProperty('--d', (Math.random() * .25).toFixed(2) + 's');
+      el.classList.add('go'); io.unobserve(el);
     }), { rootMargin: '0px 0px -8% 0px' });
-    els.forEach((el, i) => {
-      if (el.getBoundingClientRect().top > innerHeight) {
-        el.classList.add('is-pending');
-        el.style.transitionDelay = (i % 3) * 90 + 'ms';
-        io.observe(el);
-      }
-    });
+    waits.forEach(el => io.observe(el));
+    setTimeout(() => waits.forEach(el => el.classList.add('go')), 6000);
   }
 
-  /* ---------- knit sweater swatch (pixel stitches) ---------- */
-  const knit = document.getElementById('knit');
-  if (knit) {
-    const flake = ['....#....','.#..#..#.','..#.#.#..','...###...','#########','...###...','..#.#.#..','.#..#..#.','....#....'];
-    const COLS = 30, ROWS = 24, S = 6, cream = '#f3e6c8', green = '#123f2f';
-    let r = '';
-    const px = (x, y, c) => { r += `<path d="M${x*S+.4} ${y*S+.6} L${x*S+S/2} ${y*S+S-.3} L${x*S+S-.4} ${y*S+.6} L${x*S+S/2} ${y*S+2.4}Z" fill="${c}"/>`; };
-    for (let y = 0; y < ROWS; y++) for (let x = 0; x < COLS; x++) {
-      if (y < 3 || (y > 15 && y < 19)) { px(x, y, (y === 1 || y === 17) && (x + y) % 2 ? cream : green); continue; }
-      if (y >= 5 && y <= 13) {
-        const fx = x % 15 - 3, fy = y - 5;
-        if (fx >= 0 && fx < 9 && flake[fy][fx] === '#') px(x, y, cream);
-        else if (x % 15 === 12 && y === 9) px(x, y, cream);
-      }
-      if (y >= 20 && (x + (y % 2) * 2) % 4 === 0 && y % 2 === 0) px(x, y, cream);
-    }
-    knit.innerHTML = `<svg viewBox="0 0 ${COLS*S} ${ROWS*S}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${r}</svg>`;
+  /* the dance clip plays only while on screen */
+  const vid = document.getElementById('baile');
+  if (vid && 'IntersectionObserver' in window) {
+    new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting && !reduce) { const p = vid.play(); if (p) p.catch(() => {}); } else vid.pause();
+    }), { threshold: .3 }).observe(vid);
   }
 
-  /* ---------- countdown ---------- */
+  /* gentle parallax on decorative pieces */
+  const deep = [...document.querySelectorAll('[data-depth]')];
+  if (!reduce && deep.length) {
+    let ticking = false;
+    const run = () => {
+      ticking = false;
+      for (const el of deep) {
+        const host = el.parentElement.getBoundingClientRect();
+        const off = (host.top + host.height / 2 - innerHeight / 2) * parseFloat(el.dataset.depth);
+        el.style.translate = `0 ${off.toFixed(1)}px`;
+      }
+    };
+    addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(run); } }, { passive: true });
+    run();
+  }
+
+  /* 80s alarm clock: 7-segment LED digits */
+  const SEG = { a: '3,0 17,0 14,3 6,3', b: '17,1 17,15 14,13.5 14,4', c: '17,17 17,31 14,28 14,18.5', d: '3,32 17,32 14,29 6,29', e: '3,17 3,31 6,28 6,18.5', f: '3,1 3,15 6,13.5 6,4', g: '4,16 6,14.5 14,14.5 16,16 14,17.5 6,17.5' };
+  const MAP = ['abcdef', 'bc', 'abdeg', 'abcdg', 'bcfg', 'acdfg', 'acdefg', 'abc', 'abcdefg', 'abcdfg'];
+  const digitSVG = n => `<svg viewBox="0 0 20 32" aria-hidden="true">${Object.entries(SEG).map(([k, p]) => `<polygon class="seg${MAP[n].includes(k) ? ' on' : ''}" points="${p}" transform="skewX(-6) translate(1.6 0)"/>`).join('')}</svg>`;
+  const units = {}; document.querySelectorAll('.digits').forEach(el => units[el.dataset.u] = el);
+  const setU = (u, v) => { const s = String(v).padStart(2, '0'); if (units[u].dataset.v !== s) { units[u].dataset.v = s; units[u].innerHTML = [...s].map(ch => digitSVG(+ch)).join(''); } };
   const target = new Date('2026-10-17T18:00:00-06:00').getTime();
-  const pad = n => String(n).padStart(2, '0');
-  const timer = document.getElementById('timer');
-  const tick = () => {
+  const clockEl = document.getElementById('clock');
+  const clockTick = () => {
     const diff = target - Date.now();
     if (diff <= 0) {
-      const over = diff < -8 * 3600e3;
-      timer.innerHTML = `<p class="timer-done">${over ? 'GRACIAS POR CELEBRAR CON RENÉ' : '¡ES HOY! LA FIESTA YA EMPEZÓ'}</p>`;
+      document.getElementById('clock-face').innerHTML = `<p class="clock-done">${diff < -8 * 3600e3 ? 'GRACIAS POR CELEBRAR CON RENÉ' : '¡ES HOY! LA FIESTA YA EMPEZÓ'}</p>`;
       return false;
     }
-    const s = Math.floor(diff / 1000);
-    document.getElementById('t-d').textContent = pad(Math.floor(s / 86400));
-    document.getElementById('t-h').textContent = pad(Math.floor(s / 3600) % 24);
-    document.getElementById('t-m').textContent = pad(Math.floor(s / 60) % 60);
-    document.getElementById('t-s').textContent = pad(s % 60);
+    const s = Math.floor(diff / 1000), dd = Math.floor(s / 86400), hh = Math.floor(s / 3600) % 24, mm = Math.floor(s / 60) % 60;
+    setU('d', Math.min(99, dd)); setU('h', hh); setU('m', mm); setU('s', s % 60);
+    clockEl.setAttribute('aria-label', `Faltan ${dd} días, ${hh} horas y ${mm} minutos para la fiesta`);
     return true;
   };
-  if (tick()) { const id = setInterval(() => { if (!tick()) clearInterval(id); }, 1000); }
+  if (clockTick()) { const id = setInterval(() => { if (!clockTick()) clearInterval(id); }, 1000); }
 
-  /* ---------- copy number ---------- */
+  /* copy number */
   const copyBtn = document.getElementById('copy');
   copyBtn.addEventListener('click', () => {
-    const num = '+504 3333-7644';
-    const done = () => { copyBtn.textContent = 'NÚMERO COPIADO ✓'; setTimeout(() => copyBtn.textContent = 'COPIAR NÚMERO', 2200); };
-    const fallback = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('phone')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'SELECCIONADO · COPIA CON TU TECLADO'; };
-    try { navigator.clipboard.writeText(num).then(done, fallback); } catch (e) { fallback(); }
+    const done = () => { copyBtn.textContent = 'Número copiado ✓'; setTimeout(() => copyBtn.textContent = 'Copiar número', 2200); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('phone')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = 'Seleccionado: cópialo'; };
+    try { navigator.clipboard.writeText('+504 3333-7644').then(done, fallback); } catch (e) { fallback(); }
   });
 
-  /* ---------- tinsel burst on RSVP ---------- */
-  document.getElementById('cta').addEventListener('click', (ev) => {
+  /* glitter-star burst on RSVP */
+  document.getElementById('cta').addEventListener('click', ev => {
     if (reduce || !document.body.animate) return;
     const b = ev.currentTarget.getBoundingClientRect();
-    const cols = ['#d9ab4f', '#f3e6c8', '#2f7a55', '#f6e3a1', '#15110e'];
-    for (let i = 0; i < 34; i++) {
-      const p = document.createElement('span'); p.className = 'confetti';
+    for (let i = 0; i < 26; i++) {
+      const p = document.createElement('img'); p.src = 'collage/star.webp'; p.alt = ''; p.className = 'confetti';
+      const sz = 10 + Math.random() * 18; p.style.width = p.style.height = sz + 'px';
       p.style.left = (b.left + b.width / 2) + 'px'; p.style.top = (b.top + b.height / 2) + 'px';
-      p.style.background = cols[i % cols.length];
       document.body.appendChild(p);
       const a = Math.random() * Math.PI * 2, d = 90 + Math.random() * 170;
       p.animate([
         { transform: 'translate(-50%,-50%) rotate(0deg)', opacity: 1 },
-        { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 120}px)) rotate(${Math.random() * 720 - 360}deg)`, opacity: 0 }
+        { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d + 110}px)) rotate(${Math.random() * 540 - 270}deg)`, opacity: 0 }
       ], { duration: 1200 + Math.random() * 600, easing: 'cubic-bezier(.15,.7,.3,1)' }).onfinish = () => p.remove();
     }
   });
 
-  /* ---------- soundtrack: an 80s synth-pop "Jingle Bells", built live with Web Audio ---------- */
+  /* soundtrack: 80s synth-pop "Jingle Bells" built live with Web Audio */
   const Music = (() => {
-    let ctx = null, master = null, lead = null, noise = null, timer = null, bar = 0, barTime = 0;
+    let ctx = null, master = null, lead = null, noise = null, bar = 0, barTime = 0;
     const BPM = 124, BEAT = 60 / BPM, BAR = BEAT * 4;
     const hz = n => 440 * Math.pow(2, (n - 69) / 12);
     const A = [[71,1],[71,1],[71,2],[71,1],[71,1],[71,2],[71,1],[74,1],[67,1.5],[69,.5],[71,4]];
@@ -986,76 +628,40 @@ footer a:hover { color: var(--gold); }
     const CH = { G: [55,59,62], C: [55,60,64], D7: [54,57,60], D: [54,57,62] };
     const ROOT = { G: 43, C: 36, D7: 38, D: 38 };
     const PROG = ['G','G','G','G','C','G','D7','D','G','G','G','G','C','G','D7','G'];
-
-    const env = (gain, t, peak, a, dec, sus, end, rel) => {
-      gain.gain.setValueAtTime(0.0001, t);
-      gain.gain.linearRampToValueAtTime(peak, t + a);
-      gain.gain.setTargetAtTime(sus, t + a, dec);
-      gain.gain.setTargetAtTime(0.0001, end, rel);
-    };
+    const env = (g, t, peak, a, dec, sus, end, rel) => { g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.setTargetAtTime(sus, t + a, dec); g.gain.setTargetAtTime(0.0001, end, rel); };
     const synthLead = (t, f, dur) => {
-      const gn = ctx.createGain(), lp = ctx.createBiquadFilter();
-      lp.type = 'lowpass'; lp.frequency.value = 2600; lp.Q.value = 3;
-      env(gn, t, .11, .01, .1, .065, t + dur * .9, .05);
-      for (const [type, det] of [['square', -7], ['sawtooth', 7]]) {
-        const o = ctx.createOscillator(); o.type = type; o.frequency.value = f; o.detune.value = det;
-        o.connect(lp); o.start(t); o.stop(t + dur + .4);
-      }
-      lp.connect(gn); gn.connect(lead);
+      const g = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2600; lp.Q.value = 3;
+      env(g, t, .11, .01, .1, .065, t + dur * .9, .05);
+      for (const [type, det] of [['square', -7], ['sawtooth', 7]]) { const o = ctx.createOscillator(); o.type = type; o.frequency.value = f; o.detune.value = det; o.connect(lp); o.start(t); o.stop(t + dur + .4); }
+      lp.connect(g); g.connect(lead);
     };
     const pad = (t, notes, dur) => {
-      const gn = ctx.createGain(), lp = ctx.createBiquadFilter();
-      lp.type = 'lowpass'; lp.frequency.value = 1300;
-      env(gn, t, .05, .25, .5, .04, t + dur - .05, .12);
-      for (const n of notes) for (const det of [-10, 10]) {
-        const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = hz(n); o.detune.value = det;
-        o.connect(lp); o.start(t); o.stop(t + dur + .6);
-      }
-      lp.connect(gn); gn.connect(master);
+      const g = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1300;
+      env(g, t, .05, .25, .5, .04, t + dur - .05, .12);
+      for (const n of notes) for (const det of [-10, 10]) { const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = hz(n); o.detune.value = det; o.connect(lp); o.start(t); o.stop(t + dur + .6); }
+      lp.connect(g); g.connect(master);
     };
     const bass = (t, n, dur) => {
-      const o = ctx.createOscillator(), gn = ctx.createGain(), lp = ctx.createBiquadFilter();
-      o.type = 'sawtooth'; o.frequency.value = hz(n);
-      lp.type = 'lowpass'; lp.Q.value = 6; lp.frequency.setValueAtTime(1100, t); lp.frequency.exponentialRampToValueAtTime(260, t + dur);
-      env(gn, t, .2, .005, .08, .12, t + dur * .85, .02);
-      o.connect(lp); lp.connect(gn); gn.connect(master); o.start(t); o.stop(t + dur + .2);
+      const o = ctx.createOscillator(), g = ctx.createGain(), lp = ctx.createBiquadFilter();
+      o.type = 'sawtooth'; o.frequency.value = hz(n); lp.type = 'lowpass'; lp.Q.value = 6;
+      lp.frequency.setValueAtTime(1100, t); lp.frequency.exponentialRampToValueAtTime(260, t + dur);
+      env(g, t, .2, .005, .08, .12, t + dur * .85, .02);
+      o.connect(lp); lp.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .2);
     };
-    const kick = t => {
-      const o = ctx.createOscillator(), gn = ctx.createGain();
-      o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + .12);
-      gn.gain.setValueAtTime(.75, t); gn.gain.exponentialRampToValueAtTime(.001, t + .32);
-      o.connect(gn); gn.connect(master); o.start(t); o.stop(t + .35);
-    };
-    const hit = (t, type, freq, q, vol, len) => {
-      const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), gn = ctx.createGain();
-      s.buffer = noise; f.type = type; f.frequency.value = freq; f.Q.value = q;
-      gn.gain.setValueAtTime(vol, t); gn.gain.exponentialRampToValueAtTime(.001, t + len);
-      s.connect(f); f.connect(gn); gn.connect(master); s.start(t, Math.random() * .5); s.stop(t + len + .02);
-    };
-    const snare = t => {
-      hit(t, 'highpass', 1400, .7, .34, .22);
-      const o = ctx.createOscillator(), gn = ctx.createGain(); o.type = 'triangle'; o.frequency.value = 190;
-      gn.gain.setValueAtTime(.22, t); gn.gain.exponentialRampToValueAtTime(.001, t + .1);
-      o.connect(gn); gn.connect(master); o.start(t); o.stop(t + .12);
-    };
+    const kick = t => { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + .12); g.gain.setValueAtTime(.75, t); g.gain.exponentialRampToValueAtTime(.001, t + .32); o.connect(g); g.connect(master); o.start(t); o.stop(t + .35); };
+    const hit = (t, type, freq, q, vol, len) => { const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain(); s.buffer = noise; f.type = type; f.frequency.value = freq; f.Q.value = q; g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + len); s.connect(f); f.connect(g); g.connect(master); s.start(t, Math.random() * .5); s.stop(t + len + .02); };
+    const snare = t => { hit(t, 'highpass', 1400, .7, .34, .22); const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'triangle'; o.frequency.value = 190; g.gain.setValueAtTime(.22, t); g.gain.exponentialRampToValueAtTime(.001, t + .1); o.connect(g); g.connect(master); o.start(t); o.stop(t + .12); };
     const scheduleBar = (k, t) => {
       const intro = k < 2, lb = intro ? 0 : (k - 2) % 16, ch = intro ? 'G' : PROG[lb];
       for (let i = 0; i < 8; i++) bass(t + i * BEAT / 2, ROOT[ch] + (i % 2 ? 12 : 0), BEAT / 2);
-      for (let b = 0; b < 4; b++) {
-        kick(t + b * BEAT);
-        hit(t + b * BEAT + BEAT / 2, 'highpass', 7000, .7, .09, .09);
-        if (!intro && (b === 1 || b === 3)) snare(t + b * BEAT);
-      }
+      for (let b = 0; b < 4; b++) { kick(t + b * BEAT); hit(t + b * BEAT + BEAT / 2, 'highpass', 7000, .7, .09, .09); if (!intro && (b === 1 || b === 3)) snare(t + b * BEAT); }
       if (intro) return;
       for (let s = 0; s < 16; s++) hit(t + s * BEAT / 4, 'bandpass', 9000, 2.5, s % 4 === 2 ? .07 : .028, .08);
       if (lb === 15) for (let s = 12; s < 16; s++) snare(t + s * BEAT / 4);
       pad(t, CH[ch], BAR);
       for (const [st, n, d] of MEL[lb]) synthLead(t + st * BEAT, hz(n), d * BEAT);
     };
-    const tickSched = () => {
-      if (!ctx || ctx.state !== 'running') return;
-      while (barTime < ctx.currentTime + 1.2) { scheduleBar(bar, barTime); bar++; barTime += BAR; }
-    };
+    const tickSched = () => { if (!ctx || ctx.state !== 'running') return; while (barTime < ctx.currentTime + 1.2) { scheduleBar(bar, barTime); bar++; barTime += BAR; } };
     const init = () => {
       const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return false;
       ctx = new AC();
@@ -1066,42 +672,19 @@ footer a:hover { color: var(--gold); }
       dl.delayTime.value = BEAT * .75; fb.gain.value = .3; wet.gain.value = .25;
       lead.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(master);
       noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
-      const ch = noise.getChannelData(0); for (let i = 0; i < ch.length; i++) ch[i] = Math.random() * 2 - 1;
-      barTime = ctx.currentTime + .12;
-      timer = setInterval(tickSched, 200);
+      const c = noise.getChannelData(0); for (let i = 0; i < c.length; i++) c[i] = Math.random() * 2 - 1;
+      barTime = ctx.currentTime + .12; setInterval(tickSched, 200);
       return true;
     };
     return {
-      async play() {
-        if (!ctx && !init()) return false;
-        await ctx.resume();
-        master.gain.cancelScheduledValues(ctx.currentTime);
-        master.gain.setTargetAtTime(.5, ctx.currentTime, .15);
-        if (barTime < ctx.currentTime) barTime = ctx.currentTime + .1;
-        tickSched();
-        return true;
-      },
-      pause() {
-        if (!ctx) return;
-        master.gain.cancelScheduledValues(ctx.currentTime);
-        master.gain.setTargetAtTime(0, ctx.currentTime, .06);
-        setTimeout(() => ctx.suspend(), 300);
-      }
+      async play() { if (!ctx && !init()) return false; await ctx.resume(); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setTargetAtTime(.5, ctx.currentTime, .15); if (barTime < ctx.currentTime) barTime = ctx.currentTime + .1; tickSched(); return true; },
+      pause() { if (!ctx) return; master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setTargetAtTime(0, ctx.currentTime, .06); setTimeout(() => ctx.suspend(), 300); }
     };
   })();
-
   const mBtn = document.getElementById('music'), mState = document.getElementById('music-state');
   let playing = false;
-  const setUI = on => {
-    playing = on;
-    mBtn.setAttribute('aria-pressed', String(on));
-    mBtn.setAttribute('aria-label', on ? 'Pausar música navideña ochentera' : 'Activar música navideña ochentera');
-    mState.textContent = on ? 'ON' : 'OFF';
-  };
-  mBtn.addEventListener('click', async () => {
-    if (playing) { Music.pause(); setUI(false); }
-    else { setUI(true); try { if (!(await Music.play())) setUI(false); } catch (e) { setUI(false); } }
-  });
+  const setUI = on => { playing = on; mBtn.setAttribute('aria-pressed', String(on)); mBtn.setAttribute('aria-label', on ? 'Pausar música navideña ochentera' : 'Activar música navideña ochentera'); mState.textContent = on ? 'ON' : 'OFF'; };
+  mBtn.addEventListener('click', async () => { if (playing) { Music.pause(); setUI(false); } else { setUI(true); try { if (!(await Music.play())) setUI(false); } catch (e) { setUI(false); } } });
   document.addEventListener('visibilitychange', () => { if (document.hidden && playing) { Music.pause(); setUI(false); } });
 })();
 </script>
