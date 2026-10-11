@@ -6,12 +6,13 @@ body = (here / "invitacion.html").read_text(encoding="utf-8")
 
 # Canción de Spotify (en el sitio publicado aparece el reproductor de Spotify).
 SPOTIFY_TRACK = "7vQbuQcyTflfCIOu3Uzzya"
+SPOTIFY_PLAYLIST = "69JsbUGgywKEQz2SDQMsHd"  # playlist navideña con René
 # Pega aquí el enlace "Insertar un mapa" de Google Maps (el src del iframe) cuando lo tengas.
 MAP_EMBED_SRC = ""
 MAP_LINK = ""  # enlace normal de Google Maps para el botón "Abrir en Google Maps"
 
 body = body.replace('<div id="spotify-embed"></div>',
-    f'<div id="spotify-embed"><iframe src="https://open.spotify.com/embed/track/{SPOTIFY_TRACK}?theme=0" '
+    f'<div id="spotify-embed"><iframe src="https://open.spotify.com/embed/playlist/{SPOTIFY_PLAYLIST}?theme=0" '
     'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" '
     'title="Canción de la fiesta en Spotify"></iframe></div>')
 if MAP_EMBED_SRC:
