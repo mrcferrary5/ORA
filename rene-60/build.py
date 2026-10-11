@@ -4,6 +4,23 @@ from pathlib import Path
 here = Path(__file__).parent
 body = (here / "invitacion.html").read_text(encoding="utf-8")
 
+# Canción de Spotify (en el sitio publicado aparece el reproductor de Spotify).
+SPOTIFY_TRACK = "7vQbuQcyTflfCIOu3Uzzya"
+# Pega aquí el enlace "Insertar un mapa" de Google Maps (el src del iframe) cuando lo tengas.
+MAP_EMBED_SRC = ""
+MAP_LINK = ""  # enlace normal de Google Maps para el botón "Abrir en Google Maps"
+
+body = body.replace('<div id="spotify-embed"></div>',
+    f'<div id="spotify-embed"><iframe src="https://open.spotify.com/embed/track/{SPOTIFY_TRACK}?theme=0" '
+    'allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" '
+    'title="Canción de la fiesta en Spotify"></iframe></div>')
+if MAP_EMBED_SRC:
+    body = body.replace('<span class="label">Residencial Pinares</span>',
+        f'<iframe src="{MAP_EMBED_SRC}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa: Residencial Pinares"></iframe>')
+if MAP_LINK:
+    import re
+    body = re.sub(r'id="maps-link" target="_blank" rel="noopener" href="[^"]*"', f'id="maps-link" target="_blank" rel="noopener" href="{MAP_LINK}"', body)
+
 # Cambia esta URL por la dirección final donde publiques la invitación
 # (WhatsApp necesita una URL absoluta para mostrar la foto de vista previa).
 SITE_URL = "https://TU-DOMINIO/rene-60/"
@@ -14,10 +31,10 @@ head = f"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1c0507">
-<meta name="description" content="Christmas came early. René Ferrari celebra sus 60 con una fiesta de Navidad ochentera. 17 de octubre, 6:00 PM.">
+<meta name="description" content="Christmas came early. René Ferrari celebra sus 60 con una fiesta de Navidad ochentera. 17 de octubre, 6:00 p. m., Residencial Pinares.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="René Ferrari · The Big 6-0!">
-<meta property="og:description" content="80s Christmas Birthday Party · 17 de octubre · 6:00 PM · Dress code: 80s Christmas">
+<meta property="og:description" content="Fiesta navideña de los 80 · 17 de octubre · 6:00 p. m. · Residencial Pinares">
 <meta property="og:image" content="{SITE_URL}fotos/og.jpg">
 <meta property="og:url" content="{SITE_URL}">
 <meta name="twitter:card" content="summary_large_image">
