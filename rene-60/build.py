@@ -24,7 +24,9 @@ if MAP_LINK:
 
 # Cambia esta URL por la dirección final donde publiques la invitación
 # (WhatsApp necesita una URL absoluta para mostrar la foto de vista previa).
-SITE_URL = "https://TU-DOMINIO/rene-60/"
+SITE_URL = ""  # ej. "https://rene60.netlify.app/" (con / al final) para la foto de vista previa en WhatsApp
+
+OG_URL = f'<meta property="og:url" content="{SITE_URL}">' if SITE_URL else ""
 
 head = f"""<!doctype html>
 <html lang="es">
@@ -37,7 +39,7 @@ head = f"""<!doctype html>
 <meta property="og:title" content="René Ferrari · The Big 6-0!">
 <meta property="og:description" content="Fiesta navideña de los 80 · 17 de octubre · 6:30 p. m. · Residencial Pinares">
 <meta property="og:image" content="{SITE_URL}fotos/og.jpg">
-<meta property="og:url" content="{SITE_URL}">
+{OG_URL}
 <meta name="twitter:card" content="summary_large_image">
 <style>*,*::before,*::after{{box-sizing:border-box}}body{{margin:0}}[hidden]{{display:none!important}}</style>
 </head>
