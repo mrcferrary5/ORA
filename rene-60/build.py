@@ -9,7 +9,7 @@ SPOTIFY_TRACK = "7vQbuQcyTflfCIOu3Uzzya"
 SPOTIFY_PLAYLIST = "69JsbUGgywKEQz2SDQMsHd"  # playlist navideña con René
 # Pega aquí el enlace "Insertar un mapa" de Google Maps (el src del iframe) cuando lo tengas.
 MAP_EMBED_SRC = ""
-MAP_LINK = ""  # enlace normal de Google Maps para el botón "Abrir en Google Maps"
+MAP_LINK = "https://maps.app.goo.gl/iPZB8zmNUsduWHAe8"  # enlace normal de Google Maps para el botón "Abrir en Google Maps"
 
 body = body.replace('<div id="spotify-embed"></div>',
     f'<div id="spotify-embed"><iframe src="https://open.spotify.com/embed/playlist/{SPOTIFY_PLAYLIST}?theme=0" '
@@ -32,10 +32,10 @@ head = f"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1c0507">
-<meta name="description" content="Christmas came early. René Ferrari celebra sus 60 con una fiesta de Navidad ochentera. 17 de octubre, 6:00 p. m., Residencial Pinares.">
+<meta name="description" content="Christmas came early. René Ferrari celebra sus 60 con una fiesta de Navidad ochentera. 17 de octubre, 6:30 p. m., Residencial Pinares.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="René Ferrari · The Big 6-0!">
-<meta property="og:description" content="Fiesta navideña de los 80 · 17 de octubre · 6:00 p. m. · Residencial Pinares">
+<meta property="og:description" content="Fiesta navideña de los 80 · 17 de octubre · 6:30 p. m. · Residencial Pinares">
 <meta property="og:image" content="{SITE_URL}fotos/og.jpg">
 <meta property="og:url" content="{SITE_URL}">
 <meta name="twitter:card" content="summary_large_image">

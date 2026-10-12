@@ -1,6 +1,6 @@
 # René Ferrari · The Big 6-0!
 
-Invitación web para la fiesta de los 60 años de René Ferrari: 80s Christmas Birthday Party, 17 de octubre, 6:00 PM.
+Invitación web para la fiesta de los 60 años de René Ferrari: 80s Christmas Birthday Party, 17 de octubre, 6:30 p. m..
 
 ## Archivos
 
@@ -16,7 +16,7 @@ Todo el texto está en `invitacion.html`. Después de editar, ejecuta:
 python3 build.py
 ```
 
-- **Fecha de la cuenta regresiva:** busca `2026-10-17T18:00:00-06:00`.
+- **Fecha de la cuenta regresiva:** busca `2026-10-17T18:30:00-06:00`.
 - **WhatsApp:** busca `wa.me/50433337644` (número y mensaje predefinido).
 - **Calendario:** busca `calendar.google.com` (fecha, hora y zona horaria).
 - **Fotos:** reemplaza los archivos en `fotos/` con el mismo nombre (formato vertical 4:5).
