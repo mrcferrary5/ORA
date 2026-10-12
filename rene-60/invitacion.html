@@ -612,6 +612,7 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
   </div>
 </footer>
 
+<audio id="soundtrack" src="collage/jingle-80s.mp3" loop preload="none"></audio>
 <button class="music" id="music" type="button" aria-pressed="false" aria-label="Activar música navideña ochentera">
   <svg class="cassette" viewBox="0 0 46 30" aria-hidden="true">
     <rect x="1" y="1" width="44" height="28" rx="3" fill="#160b0b"/>
@@ -723,72 +724,12 @@ footer a { text-decoration: none; } footer a:hover { color: var(--gold); }
     }
   });
 
-  /* soundtrack: 80s synth-pop "Jingle Bells" built live with Web Audio */
-  const Music = (() => {
-    let ctx = null, master = null, lead = null, noise = null, bar = 0, barTime = 0;
-    const BPM = 124, BEAT = 60 / BPM, BAR = BEAT * 4;
-    const hz = n => 440 * Math.pow(2, (n - 69) / 12);
-    const A = [[71,1],[71,1],[71,2],[71,1],[71,1],[71,2],[71,1],[74,1],[67,1.5],[69,.5],[71,4]];
-    const P1 = [...A, [72,1],[72,1],[72,1.5],[72,.5],[72,1],[71,1],[71,1],[71,.5],[71,.5],[71,1],[69,1],[69,1],[71,1],[69,2],[74,2]];
-    const P2 = [...A, [72,1],[72,1],[72,1.5],[72,.5],[72,1],[71,1],[71,1],[71,.5],[71,.5],[74,1],[74,1],[72,1],[69,1],[67,4]];
-    const toBars = seq => { const out = []; let t = 0; for (const [n, d] of seq) { const b = Math.floor(t / 4 + 1e-6); (out[b] = out[b] || []).push([t - b * 4, n, d]); t += d; } return out; };
-    const MEL = [...toBars(P1), ...toBars(P2)];
-    const CH = { G: [55,59,62], C: [55,60,64], D7: [54,57,60], D: [54,57,62] };
-    const ROOT = { G: 43, C: 36, D7: 38, D: 38 };
-    const PROG = ['G','G','G','G','C','G','D7','D','G','G','G','G','C','G','D7','G'];
-    const env = (g, t, peak, a, dec, sus, end, rel) => { g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.setTargetAtTime(sus, t + a, dec); g.gain.setTargetAtTime(0.0001, end, rel); };
-    const synthLead = (t, f, dur) => {
-      const g = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2600; lp.Q.value = 3;
-      env(g, t, .11, .01, .1, .065, t + dur * .9, .05);
-      for (const [type, det] of [['square', -7], ['sawtooth', 7]]) { const o = ctx.createOscillator(); o.type = type; o.frequency.value = f; o.detune.value = det; o.connect(lp); o.start(t); o.stop(t + dur + .4); }
-      lp.connect(g); g.connect(lead);
-    };
-    const pad = (t, notes, dur) => {
-      const g = ctx.createGain(), lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1300;
-      env(g, t, .05, .25, .5, .04, t + dur - .05, .12);
-      for (const n of notes) for (const det of [-10, 10]) { const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = hz(n); o.detune.value = det; o.connect(lp); o.start(t); o.stop(t + dur + .6); }
-      lp.connect(g); g.connect(master);
-    };
-    const bass = (t, n, dur) => {
-      const o = ctx.createOscillator(), g = ctx.createGain(), lp = ctx.createBiquadFilter();
-      o.type = 'sawtooth'; o.frequency.value = hz(n); lp.type = 'lowpass'; lp.Q.value = 6;
-      lp.frequency.setValueAtTime(1100, t); lp.frequency.exponentialRampToValueAtTime(260, t + dur);
-      env(g, t, .2, .005, .08, .12, t + dur * .85, .02);
-      o.connect(lp); lp.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .2);
-    };
-    const kick = t => { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(42, t + .12); g.gain.setValueAtTime(.75, t); g.gain.exponentialRampToValueAtTime(.001, t + .32); o.connect(g); g.connect(master); o.start(t); o.stop(t + .35); };
-    const hit = (t, type, freq, q, vol, len) => { const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain(); s.buffer = noise; f.type = type; f.frequency.value = freq; f.Q.value = q; g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + len); s.connect(f); f.connect(g); g.connect(master); s.start(t, Math.random() * .5); s.stop(t + len + .02); };
-    const snare = t => { hit(t, 'highpass', 1400, .7, .34, .22); const o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'triangle'; o.frequency.value = 190; g.gain.setValueAtTime(.22, t); g.gain.exponentialRampToValueAtTime(.001, t + .1); o.connect(g); g.connect(master); o.start(t); o.stop(t + .12); };
-    const scheduleBar = (k, t) => {
-      const intro = k < 2, lb = intro ? 0 : (k - 2) % 16, ch = intro ? 'G' : PROG[lb];
-      for (let i = 0; i < 8; i++) bass(t + i * BEAT / 2, ROOT[ch] + (i % 2 ? 12 : 0), BEAT / 2);
-      for (let b = 0; b < 4; b++) { kick(t + b * BEAT); hit(t + b * BEAT + BEAT / 2, 'highpass', 7000, .7, .09, .09); if (!intro && (b === 1 || b === 3)) snare(t + b * BEAT); }
-      if (intro) return;
-      for (let s = 0; s < 16; s++) hit(t + s * BEAT / 4, 'bandpass', 9000, 2.5, s % 4 === 2 ? .07 : .028, .08);
-      if (lb === 15) for (let s = 12; s < 16; s++) snare(t + s * BEAT / 4);
-      pad(t, CH[ch], BAR);
-      for (const [st, n, d] of MEL[lb]) synthLead(t + st * BEAT, hz(n), d * BEAT);
-    };
-    const tickSched = () => { if (!ctx || ctx.state !== 'running') return; while (barTime < ctx.currentTime + 1.2) { scheduleBar(bar, barTime); bar++; barTime += BAR; } };
-    const init = () => {
-      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return false;
-      ctx = new AC();
-      const comp = ctx.createDynamicsCompressor(); comp.connect(ctx.destination);
-      master = ctx.createGain(); master.gain.value = 0; master.connect(comp);
-      lead = ctx.createGain(); lead.connect(master);
-      const dl = ctx.createDelay(1), fb = ctx.createGain(), wet = ctx.createGain();
-      dl.delayTime.value = BEAT * .75; fb.gain.value = .3; wet.gain.value = .25;
-      lead.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(master);
-      noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
-      const c = noise.getChannelData(0); for (let i = 0; i < c.length; i++) c[i] = Math.random() * 2 - 1;
-      barTime = ctx.currentTime + .12; setInterval(tickSched, 200);
-      return true;
-    };
-    return {
-      async play() { if (!ctx && !init()) return false; await ctx.resume(); master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setTargetAtTime(.5, ctx.currentTime, .15); if (barTime < ctx.currentTime) barTime = ctx.currentTime + .1; tickSched(); return true; },
-      pause() { if (!ctx) return; master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setTargetAtTime(0, ctx.currentTime, .06); setTimeout(() => ctx.suspend(), 300); }
-    };
-  })();
+  /* soundtrack: 80s synth-pop "Jingle Bells" (collage/jingle-80s.mp3), plays only after a tap */
+  const audio = document.getElementById('soundtrack');
+  const Music = {
+    async play() { audio.volume = .8; await audio.play(); return true; },
+    pause() { audio.pause(); }
+  };
   const mBtn = document.getElementById('music'), mState = document.getElementById('music-state');
   let playing = false;
   const setUI = on => { playing = on; mBtn.setAttribute('aria-pressed', String(on)); mBtn.setAttribute('aria-label', on ? 'Pausar música navideña ochentera' : 'Activar música navideña ochentera'); mState.textContent = on ? 'ON' : 'OFF'; };
